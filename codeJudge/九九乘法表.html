@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>九九乘法表</title>
+    <style>
+        .row{
+            width: 100%;
+            height: 30px;
+        }
+        .cell{
+            list-style: none;
+            float: left;
+            height: 30px;
+            width: 100px;
+            margin-right:10px ;
+            line-height: 30px;
+            text-align: center;
+            background: chartreuse;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            
+            Math99()
+        }
+        function Math99() {
+            for(let i=1; i<10; i++ ){
+                let vUl = document.createElement('ul')
+                vUl.setAttribute('class','row')
+                document.getElementsByTagName('body')[0].appendChild(vUl);
+                for(let j=1; j<=i; j++){
+                    let vli = document.createElement('li');
+                    vli.setAttribute('class','cell')
+                    let text = document.createTextNode(j+'*'+i+'='+i*j);
+                    vli.appendChild(text);
+                    vUl.appendChild(vli)
+                }
+            }
+            
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

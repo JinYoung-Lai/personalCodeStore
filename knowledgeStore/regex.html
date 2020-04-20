@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+    <script>
+        window.onload = function () {
+            let str1 = 'asd1367sds6215415xxsax';
+            let str3 = '‪E:\\desktop\\test.txt'
+            let res = str1.replace(/\d+/g, function (a, k, v) {
+                console.log(a, k, v)//匹配中的项
+                // console.log(k)//匹配项在字符串中的位置
+                //console.log(v)
+            })
+            parse2Int()
+            regTime()
+        }
+        function parse2Int() {
+            let str = '942506492@qq.com';
+           
+            let reg = /\w+([-+.]\w+)*@\w+([-.]\w)*\.\w+([-.]\w)*$/g
+            console.log(reg.test(str))
+        }
+        function regTime() {
+            //23:01 01:00 匹配时间
+            var str = '23:01'
+            var reg = /^[0-1][0-9]|[2][0-3]:[0-5][0-9]$/;        
+            console.log(reg.test(str))
+             
+        }
+        function regDate() {
+            //23:01 01:00 匹配时间
+            var str = '2031-09-31'
+            var reg = /^[0-9]{4}-(0[0-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;           
+            console.log(reg.test(str))
+        }
+        function regUrl(){
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

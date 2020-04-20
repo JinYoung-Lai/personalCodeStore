@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <form>
+    <select name="location" id="selLocation" >
+      <option value="Sunnyvale, CA">Sunnyvale</option>
+      <option value="Los Angeles, CA">Los Angeles</option>
+      <option value="Mountain View, CA">Mountain View</option>
+      <option value="">China</option>
+      <option>Australia</option>
+    </select>
+  </form>
+</body>
+<script>
+  window.onload = function () {
+    let selectbox = document.forms[0].elements['location'];
+    //获取value text推荐方法
+    let text = selectbox.options[0].text;
+    let value = selectbox.options[0].value;
+    console.log(text);
+    console.log(value);
+
+    // 14.3.1
+    function getSelectedOptions(selectbox){
+      let result = new Array();
+      let option = null;
+      let len = selectbox.options.length;
+      for(let i = 0; i < len; i++){
+        option = selectbox.options[i];
+        if(option.selected){
+          result.push(option)
+        }
+      }
+      return result;
+    }
+    //let selectbox = document.getElementById("selLocation");
+    let selectedOptions = getSelectedOptions(selectbox);
+    console.log(selectedOptions)
+  }
+</script>
+
+</html>

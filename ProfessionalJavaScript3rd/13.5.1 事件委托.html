@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>13.5.1 事件委托</title>
+</head>
+
+<body>
+  <ul id="myLinks">
+    <li id="goSomewhere">Go somewhere</li>
+    <li id="doSomething">Do something</li>
+    <li id="sayHi">Say hi</li>
+  </ul>
+</body>
+<script>
+  window.onload = function () {
+    // let item1 = document.getElementById("goSomewhere");
+    // let item2 = document.getElementById("doSomething");
+    // let item3 = document.getElementById("sayHi");
+    let links = document.getElementById("myLinks");
+    links.addEventListener("click", function (e) {
+      let target = e.target
+      console.log(e.target.id);
+      switch (target.id) {
+        case "goSomewhere":
+          document.title = "I changed the document's title";
+          break;
+        case "goSomewhere":
+          location.href = "http://localhost:8080/#/";
+          break;
+        case "sayHi":
+          alert("Hi");
+          break;
+      }
+
+    })
+
+  }
+</script>
+
+</html>

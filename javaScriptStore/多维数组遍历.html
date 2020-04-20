@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>多维数组遍历</title>
+	</head>
+
+	<body>
+		<script>
+			window.onload = () => {
+				Array.prototype.each = function(fn) {
+					try {
+						//定义计数器
+						const ZERO = 0;
+						this.i = ZERO;
+						//判断数组非空且参数的构造器为函数
+						if (this.length > this.i && fn.constructor === Function) {
+							while (this.length > this.i) {
+								var item = this[this.i];
+								//如果当前元素是数组
+								if (item && item.constructor === Array) {
+									if (item.length > ZERO) {
+										item.each(fn);
+									} else {
+										//空数组显示"[]", 而非空白
+										fn.call(item, "[]");
+									}
+								} else { //当前元素非数组,此处扩展遍历对象,以键值对方式显示，而非[object Object]
+									if (item && typeof item === "object") {
+										//非空对象
+										if (Object.keys(item).length > ZERO) {
+											for (const key in item) {
+												fn.call(item, key + " : " + item[key]);
+											}
+										} else {
+											//空对象
+											fn.call(item, "{}");
+										}
+									} else { //其余元素，包括对象类型的null
+										fn.call(item, item);
+									}
+								}
+								this.i++;
+							}
+							//销毁计数器，回收内存
+							delete this.i;
+						}
+					} catch (e) {
+						console.log("error happened in printing multiple-dimension array. error message : " + e);
+						throw e;
+					}
+					return this;
+				};
+				let array = ["中国", "Charles", 0, ["A", "B", "C"],
+					["D", ["E", "F"], "G"], {
+						name: "ITACHI",
+						gander: "Male"
+					},
+					[], null, undefined, false
+				];
+				array.each(item => {
+					console.log(item);
+				})
+
+				let treedata = [{
+						id: 1,
+						label: "Level one 1",
+						checked: false,
+						children: [{
+							id: 4,
+							checked: false,
+							label: "Level two 1-1",
+							children: [{
+									id: 9,
+									checked: true,
+									label: "Level three 1-1-1"
+								},
+								{
+									id: 10,
+									checked: false,
+									label: "Level three 1-1-2"
+								}
+							]
+						}]
+					},
+					{
+						id: 2,
+						label: "Level one 2",
+						checked: false,
+						children: [{
+								id: 5,
+								checked: true,
+								label: "Level two 2-1"
+							},
+							{
+								id: 6,
+								checked: false,
+								label: "Level two 2-2"
+							}
+						]
+					},
+					{
+						id: 3,
+						label: "Level one 3",
+						checked: false,
+						children: [{
+								id: 7,
+								label: "Level two 3-1",
+								checked: false
+							},
+							{
+								id: 8,
+								checked: false,
+								label: "Level two 3-2"
+							}
+						]
+					}
+				]
+				let newArr = []
+				function traverse(arr) {
+					//let newArr = []
+					arr.map(item => {
+						console.log(item)
+						if (item['checked'] == true) {
+							newArr.push(item)
+							//console.log(newArr)
+						} else if (item['children'] != undefined) {
+							traverse(item['children']);
+						}
+					})
+					//return newArr
+				}
+				traverse(treedata)
+				setTimeout(() => {
+						console.log(newArr);
+				},1000)
+			
+			}
+		</script>
+	</body>
+
+</html>

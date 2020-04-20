@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6.2.7 稳妥构造函数模式</title>
+</head>
+<body>
+  <script>
+    window.onload = () => {
+      /* 这样，变量friend 中保存的是一个稳妥对象，而除了调用sayName()方法外，
+      没有别的方式可以访问其数据成员。即使有其他代码会给这个对象添加方法或数据
+      成员，但也不可能有别的办法访问传入到构造函数中的原始数据 */
+      function Person(name, age, job){
+        let o = new Object();
+        o.name = name;
+        o.sayName = function(){
+          alert(this.name);
+        };
+        return o;
+      }
+      let friend = new Person("Nicholas", 29, "Software Engineer");   
+      friend.sayName();
+    }
+  </script>
+</body>
+</html>

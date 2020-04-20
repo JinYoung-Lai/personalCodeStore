@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./EventUtil.js"></script>
+  <title>16.2 原生拖放</title>
+  <style>
+    .dragdiv {
+      width: 50px;
+      height: 50px;
+      background: pink;
+    }
+
+    .dragtarget {
+      width: 500px;
+      height: 500px;
+      border: 1px solid #999;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dragdiv" id="dragdiv" draggable="true">
+
+  </div>
+  <div class="dragtarget" id="dragtarget">
+
+  </div>
+</body>
+<script>
+  window.onload = function () {
+    let dropTarget = document.getElementById('dragtarget');
+    EventUtil.addHandler(dropTarget, 'dragover', function () {
+      EventUtil.preventDefault(event)
+    });
+    EventUtil.addHandler(dropTarget, 'dragenter', function () {
+      EventUtil.preventDefault(event)
+    });
+    EventUtil.addHandler(dropTarget, "drop", function (event) {
+      EventUtil.preventDefault(event);
+    });
+  }
+</script>
+
+</html>

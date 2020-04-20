@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>21.1 XMLHttpRequest 对象</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    //兼容ie7构造函数
+    function createXHR() {
+      if (typeof arguments.callee.activeXString != "string") {
+        let versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0",
+          "MSXML2.XMLHttp"],
+          i, len;
+        for(i = 0; len = versions.length; i++){
+          try{
+            new ActiveXObject(versions[i]);
+            arguments.callee.activeXString = versions[i];
+            break;
+          }catch(ex){
+            console.log("error--", ex)
+          }
+        }  
+      }
+      return new ActiveXObject(arguments.callee.activeXString)
+    }
+  }
+</script>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+	<style>
+		/* .odiv{
+			width: 100px;
+			height: 40px;
+			border: 1px solid #333;
+		} */
+		.input{
+			border: none;
+		}
+		:-webkit-input:focus{
+			border-bottom: 1px solid red;
+		}
+		.input:focus{
+			border-bottom: 1px solid red;
+		}
+		/* .input:hover{
+			border: 1px solid red;
+		} */
+	</style>
+</head>
+<body>
+  <div class="odiv" id="oDiv">
+		输入：<input class="input">
+	</div>
+</body>
+<script>
+  window.onload = function(){
+// alert(document.body.offsetHeight)
+		let oDiv = document.getElementById('oDiv')
+		console.log(oDiv.offsetWidth)
+		console.log(oDiv.clientWidth)
+  }
+</script>
+</html>

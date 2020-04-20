@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>普通数组去重</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    let arr = [1, 2, 3, 4, NaN, 'a', 'b', 'a', undefined, NaN, null, null];
+    // 方法一 indexof 
+    function method_1(arr) {
+      let newArr = [];
+      let flag = true;
+      for (let i = 0; i < arr.length; i++) {
+        if (newArr.indexOf(arr[i]) == -1) {
+          if (arr[i] != arr[i]) {
+            if (flag) {
+              newArr.push(arr[i]);
+              flag = false
+            }
+          } else {
+            newArr.push(arr[i]);
+          }
+
+        }
+      }
+      return newArr
+    }
+    console.log("1", method_1(arr));
+
+    // 方法二 对象方法
+    function method_2(arr) {
+      let newArr = [];
+      let obj = {}
+      for (let i = 0; i < arr.length; i++) {
+        if (!obj[arr[i]]) {
+          newArr.push(arr[i]);
+          obj[arr[i]] = 1;
+        }
+      }
+      return newArr
+    }
+    console.log("2", method_2(arr));
+
+    // 方法三 ES6 set 方法 最快
+    function method_3(arr) {
+      return Array.from(new Set(arr))
+    }
+    console.log("3", method_3(arr));
+
+    // 方法四 includes方法
+    function method_4(arr) {
+      let newArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        if (!newArr.includes(arr[i])) {
+          newArr.push(arr[i]);
+        }
+      }
+      return newArr
+    }
+    console.log("4", method_4(arr))
+
+    // 方法5 排序对比，冒泡法 遇到NaN不好处理
+    function method_5(arr) {
+      let newArr = [arr[0]];
+      let flag = true;
+      let arrSort = arr.sort();
+      for (let i = 1; i < arr.length; i++) {
+        if (arrSort[i - 1] !== arrSort[i]) {
+          if (arrSort[i] != arrSort[i]) {
+            if (flag) {
+              newArr.push(arrSort[i]);
+              flag = false;
+            }
+          }else{
+            newArr.push(arrSort[i]);
+          }
+        }
+      }
+      return newArr
+    }
+    console.log("5", method_5(arr))
+
+    console.log(typeof (NaN))
+  }
+</script>
+
+</html>

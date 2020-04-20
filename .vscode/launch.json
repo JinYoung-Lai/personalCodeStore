@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - RegexMatches",
+      "request": "launch",
+      "mainClass": "RegexMatches",
+      "projectName": "codeStore_874659c7"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - TestArray",
+      "request": "launch",
+      "mainClass": "TestArray",
+      "projectName": "codeStore_874659c7"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Puppy",
+      "request": "launch",
+      "mainClass": "Puppy"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - EmployeeTest",
+      "request": "launch",
+      "mainClass": "EmployeeTest"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - HelloWorld",
+      "request": "launch",
+      "mainClass": "HelloWorld"
+    }
+  ]
+}

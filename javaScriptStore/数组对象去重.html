@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组对象去重</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    window.onload = function () {
+        let arrayList = [{
+            id: '1',
+            name: 'one'
+        }, {
+            id: '2',
+            name: 'two',
+        }, {
+            id: '3',
+            name: 'three'
+        }, {
+            id: '1',
+            name: 'one'
+        }, {
+            id: 2,
+            name: '_two',
+        }, {
+            id: '3',
+            name: 'three'
+        }, {
+            id: '4',
+            name: 'four'
+        }]
+        //let newArr_map = unique_map(arrayList, 'id');
+        let newArr_reduce = unique_reduce(arrayList, 'id');
+        console.log(newArr_reduce)
+
+    }
+    //从最高效的方法开始往下走
+    //1、ES6 map 方法
+    function unique_map(arr, _key) {
+        //新建一个map数据集
+        let map = new Map();
+        arr.forEach(element => {
+            // map has()方法，有则返回true。
+            // if(!map.has(element[_key])){
+            //     map.set(element[_key],element)
+            // }
+
+            //如果对同一个键多次赋值，后面的值将覆盖前面的值。
+            map.set(element[_key], element)
+        });
+        // 知识扩展
+        return [...map.values()];
+    }
+    // 知识扩展
+    // let map = new Map([
+        //     [1, 'one'],
+        //     [2, 'two'],
+        //     [3, 'three'],
+        // ]);
+
+        //[...map.keys()]
+        // [1, 2, 3]
+
+        //[...map.values()]
+        // ['one', 'two', 'three']
+
+        //[...map.entries()]
+        // [[1,'one'], [2, 'two'], [3, 'three']]
+
+        //[...map]
+        // [[1,'one'], [2, 'two'], [3, 'three']]
+
+    //reduce 方法 
+    //array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+    function unique_reduce(arr, _key){
+        let obj = {}
+        let newarr = arr.reduce((prev,next) => {
+            //prev 初始值, 或者计算结束后的返回值。
+            //next 当前元素
+            //判断是否为true
+            obj[next[_key] + typeof next[_key]] ? '' : 
+            obj[next[_key] + typeof next[_key]] = true && prev.push(next); //为false时，先设为true，然后push进新数组           
+            return prev
+        },[])
+        return newarr
+    }
+</script>
+
+</html>

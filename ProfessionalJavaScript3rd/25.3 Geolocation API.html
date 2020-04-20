@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>25.3　Geolocation API</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      drawMapCenteredAt(position.coords.latitude, positions.coords.longitude);
+    }, function (error) {
+      console.log("Error code: " + error.code);
+      console.log("Error message: " + error.message);
+    }, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 25000
+    });
+  }
+</script>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6.3.1 原型链</title>
+</head>
+
+<body>
+  <script>
+    window.onload = () => {
+      function SuperType() {
+        this.colors = ['red', 'blue', 'green'];
+      }
+      function SubType() { }
+
+      // 继承SuperType
+      SubType.prototype = new SuperType();
+
+      let instance_1 = new SubType();
+      instance_1.colors.push('pink');
+
+      let instance_2 = new SubType();
+      console.log('instance_2', instance_2.colors); // ["red", "blue", "green", "pink"]
+      /* 包含引用类型值的原型属性会被所有实例共享；
+        而这也正是为什么要在构造函数中，而不是在原型
+        对象中定义属性的原因。在通过原型来实现继承时，
+        原型实际上会变成另一个类型的实例。于是，原先
+        的实例属性也就顺理成章地变成了现在的原型属性了。 
+      */
+
+      //--------------
+      // 借用构造函数
+      //--------------
+      function SuperTypeCon(name) {
+        this.name = name
+        this.colors = ['red', 'blue', 'green'];
+      }
+      function SubTypeCon() {
+        // 继承了SuperType，同时还传递了参数
+        SuperTypeCon.call(this, 'Nicholas');
+        // 实例属性
+        this.age = 29;
+      }
+
+      let instanceCon_1 = new SubTypeCon();
+      instanceCon_1.colors.push('pink');
+      let instanceCon_2 = new SubTypeCon();
+
+      console.log('instanceCon_1', instanceCon_1.colors) // ["red", "blue", "green", "pink"]
+      console.log('instanceCon_2', instanceCon_2.colors) // ["red", "blue", "green"]
+      console.log(instanceCon_1.name);
+      console.log(instanceCon_1.age);
+      console.log(instanceCon_2.name);
+      console.log(instanceCon_2.age);
+
+    }
+  </script>
+</body>
+
+</html>

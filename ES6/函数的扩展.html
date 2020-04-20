@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>函数的扩展</title>
+		<style>
+			.box{
+				min-height: 40px;
+				width: 100px;
+				overflow: hidden;
+				 word-wrap: break-word;
+				 word-break: normal;
+				border: 1px solid #FFC0CB;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			
+		</div>
+		
+	</body>
+	<script>
+		window.onload = function(){
+			function log(x, y = 'word'){
+				console.log(x, y)
+			}
+			
+			log('hello', '')
+			
+			let foo = 'outer'
+			function bar(func = x => foo){
+				let foo = 'inner';
+				console.log(func()) //outer
+			}
+			bar()
+			
+			// function bar2(func = () => foo2){
+			// 	let foo2 = 'inner';
+			// 	console.log(func()) // foo2 is not defined
+			// }
+			// bar2()
+			
+			function add(...values){
+				let sum = 0;
+				for(let val of values){
+					sum += val;
+				}
+				return sum;
+			}
+			console.log(add(2, 5, 3))
+			
+			//rest改写push方法
+			function push(arr, ...items){
+				items.forEach(item => {
+					arr.push(item);
+				});
+			}
+			let a = [];
+			push(a, 2,'x',3, 1);
+			console.log(a)
+			
+			
+			let b = []
+			Array.prototype.pushMany = function(...items){
+				items.forEach(item => {
+					this.push(item);
+				});
+			}
+			b.pushMany(2,3,4,5)
+			console.log(b)
+			
+			let largest = Math.max.apply(null, [14, 3, 77]);
+			let Maximum = Math.max(...[14, 3, 77])
+			console.log(Maximum)
+			
+			// 合并数组
+			let more = [3, 4]
+			console.log([1, 2].concat([3 , 4]))
+			console.log([1, 2, ...more])
+			
+			//递归非常耗费内存，因为需要同时保存成千上百个调用帧，很容易发生“栈溢出”错误（stack overflow）。
+			//但对于尾递归来说，由于只存在一个调用帧，所以永远不会发生“栈溢出”错误。
+			function factorialNormal(n) {
+			  if (n === 1) return 1;
+			  return n * factorial(n - 1);
+			}
+			// 改进后
+			function factorial(n, total){
+				if(n === 1) return total;
+				return factorial(n-1, n * total);
+			}
+			console.log(factorial(5, 1)) 
+			
+			function Fibonacci(n, ac1 = 1, ac2 = 1){
+				if(n <= 1){
+					return ac2
+				}
+				return Fibonacci(n-1, ac2, ac1 + ac2)
+			}
+			console.log(Fibonacci(5))
+			
+			
+			// 蹦床函数
+			/* 这里是返回一个函数，然后执行该函数，而不是函数里面调用函数，
+			 这样就避免了递归执行，从而就消除了调用栈过大的问题。*/
+			// 蹦床函数并不是真正的尾递归优化
+			function trampoline(f){
+				while (f && f instanceof Function){
+					f = f();
+				}
+				return f;
+			}
+			// 
+			function tco(f){
+				var value;
+				var active = false;
+				var accumulated = [];
+				return function accumulator(){
+					accumulated.push(arguments);
+					if(!active){
+						active = true;
+						while (accumulated.length){
+							value = f.apply(this, accumulated.shift())
+						}
+						active = false;
+						return value;
+					}
+				}
+			}
+			
+			var sumtco = tco(function(x, y){
+				if(y > 0){
+					return sumtco(x + 1, y - 1);
+				}else{
+					return x
+				}
+			})
+			console.log(sumtco(1, 10000))
+			/* 上面代码中，tco函数是尾递归优化的实现，它的奥妙就在于状态变量active。
+			默认情况下，这个变量是不激活的。一旦进入尾递归优化的过程，这个变量就激活了。
+			然后，每一轮递归sum返回的都是undefined，所以就避免了递归执行；而accumulated
+			数组存放每一轮sum执行的参数，总是有值的，这就保证了accumulator函数内部的
+			while循环总是会执行。这样就很巧妙地将“递归”改成了“循环”，而后一轮的参数会
+			取代前一轮的参数，保证了调用栈只有一层。 */
+		}
+	</script>
+</html>

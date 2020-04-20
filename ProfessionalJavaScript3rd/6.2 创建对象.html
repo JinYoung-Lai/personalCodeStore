@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6.2 创建对象</title>
+</head>
+
+<body>
+  <script>
+    window.onload = () => {
+      // -------
+      // 工厂模式
+      // -------
+      /* 工厂模式虽然解决了创建多个相似对象的问题，但却没
+         有解决对象识别的问题（即怎样知道一个对象的类型 */
+      function CreatePerson(name, age, job) {
+        let o = new Object();
+        o.name = name;
+        o.age = age;
+        o.job = job;
+        o.sayName = function () {
+          console.log(this.name);
+        }
+        return o;
+      }
+      let factoryPerson = CreatePerson('nicoo', 7, 'Enginner')
+
+      
+
+      // -------
+      // 构造函数
+      // -------
+      /* 使用构造函数的主要问题，就是每个方法都要在每个实例上重新创建一遍。*/
+      function Personstruct(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.sayName = function () {
+          console.log(this.name)
+        }
+      }
+      // 当做构造函数使用
+      let funcPerson = new Personstruct('aobama', 8, 'master');
+      // 作为普通函数调用
+      Personstruct('Greg', 27, 'Doctor');
+      // 在另一个对象的作用域中调用
+      let obj = new Object();
+      Personstruct.call(obj, 'anni', 12, 'Nurse')
+      obj.sayName();
+    
+
+      // ---------
+      // 原型模式
+      // ---------
+      function Personprototype() {}
+      Personprototype.prototype.name = 'Jiela';
+      Personprototype.prototype.age = 29;
+      Personprototype.prototype.job = "Software Engineer";
+      Personprototype.prototype.sayName = function () {
+        console.log(this.name);
+      }
+
+      let personPro = new Personprototype();
+      let personPro_2 = new Personprototype();
+      personPro_2.name = 'personPro_2'
+      personPro.sayName();   // 来自原型
+      personPro_2.sayName(); // 来自实例
+
+      /* 原型对象：只要创建一个新函数，就会根据一组特定的规则为该函数创建一个Prototype属性,
+         这个属性指向函数的原型对象，在默认情况下，所有原型对象都会自动获得一个constructor
+        （构造函数）属性，这个属性包含一个指向prototype 属性所在函数的指针。      
+      */
+
+      // 通过isPrototypeOf()方法检测对象之间是否存在这种关系
+      console.log(Personprototype.prototype.isPrototypeOf(personPro));
+
+      /* 使用hasOwnProperty()方法可以检测一个属性是存在于实例中，还是存在于原型中。这个方法（不
+         要忘了它是从Object 继承来的）只在给定属性存在于对象实例中时，才会返回true。*/
+      console.log('personPro hasOwnProperty()', personPro.hasOwnProperty('name'));
+      console.log('personPro_2 hasOwnProperty()', personPro_2.hasOwnProperty('name'));
+
+      let ppKeys = Object.keys(Personprototype.prototype); // ["name", "age", "job", "sayName"]
+      console.log(ppKeys);
+      var p1 = new Personprototype();
+      p1.name = "Rob";
+      p1.age = 31;
+      var p1keys = Object.keys(p1);
+      console.log(p1keys); // ["name", "age"]
+
+      let keys = Object.getOwnPropertyNames(Personprototype.prototype)
+      console.log(keys); // ["constructor", "name", "age", "job", "sayName"]
+
+      
+      
+
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>14.4 表达序列化</title>
+</head>
+
+<body>
+  <form id="formfield">
+    <input type="text" id="name">
+    <input type="password" id="password">
+    <select name="location" id="selLocation">
+      <option value="Sunnyvale, CA">Sunnyvale</option>
+      <option value="Los Angeles, CA">Los Angeles</option>
+      <option value="Mountain View, CA">Mountain View</option>
+      <option value="">China</option>
+      <option>Australia</option>
+    </select>
+    <button type="reset">重置</button>
+    <button type="submit">提交</button>
+  </form>
+</body>
+<script>
+  window.onload = function () {
+    let formfield = document.getElementById('formfield')
+    let foemparts = seriallize(formfield)
+    
+    function seriallize(form) {
+      let parts = [],
+        field = null,
+        i,
+        len,
+        j,
+        optLen,
+        option,
+        optValue;
+      for (i = 0, len = form.elements.length; i < len; i++) {
+        field = form.elements[i];
+        switch (field.type) {
+          case "select-one":
+          case "select-mutiple":
+            if (field.name.length) {
+              for (j = 0, optLen = field.options.length; j < optLen; j++) {
+                option = field.options[j];
+                if (option.selected) {
+                  optValue = "";
+                  if (option.hasAttribute) {
+                    optValue = (option.hasAttribute("value") ? option.value : option.text);
+                  } else {
+                    optValue = (option.attributes["value"].specified ? option.value : option.text)
+                  }
+                  parts.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(optValue))
+                  // 1、如果只是编码字符串，不和URL有半毛钱关系，那么用escape，而且这个方法一般不会用到。
+                  // 2、如果你需要编码整个URL，然后需要使用这个URL，那么用encodeURI。
+                  // 3、当你需要编码URL中的参数的时候，那么encodeURIComponent是最好方法。
+                }
+              }
+            }
+            break;
+          case undefined: //字段集
+          case "file":    //文件输入
+          case "submit":  //提交
+          case "reset":   //重置按钮
+          case "button":  //自定义按钮      
+            break;
+          case "radio":
+          case "checkbox":
+            if(!field.checked){
+              break;
+            }    
+          default:
+            if(field.name.length){
+              parts.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(optValue))
+            }  
+        }
+      }
+      return parts.join("&")
+    }
+  }
+</script>
+
+</html>

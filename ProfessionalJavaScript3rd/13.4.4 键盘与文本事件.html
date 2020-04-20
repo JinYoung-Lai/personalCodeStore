@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>13.4.4　键盘与文本事件</title>
+</head>
+<body>
+
+  <input placeholder="请输入" class="inputtext">
+</body>
+<script>
+  window.onload = function(){
+    let textbox = document.getElementsByClassName("inputtext")[0];
+    textbox.addEventListener('textInput', function(){
+      alert(1)
+    });
+    // textbox.addEventListener('focus', function(){
+    //   alert(1)
+    // });
+  }
+</script>
+</html>

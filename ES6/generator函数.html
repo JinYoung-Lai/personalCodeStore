@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>generator函数</title>
+</head>
+<body>
+  
+</body>
+<script>
+  window.onload = function(){
+    // 普通函数
+    function fib_normal(n){
+      let t,
+          a = 0,
+          b = 1,
+          arr = [0, 1];
+      while(arr.length < n){
+        [a, b] = [b, a + b];
+        arr.push(b);
+      }    
+      return arr
+    }
+
+    // generator
+    function* fib(max){
+      let t,
+        a = 0,
+        b = 1,
+        n = 0; 
+      while(n < max){
+        yield a;
+        [a, b] = [b, a + b];
+        n ++;
+      }
+      return;
+    }
+
+
+    console.log(fib_normal(5));
+    for(let x of fib(10)){
+      console.log(x)
+    }
+    
+  }
+</script>
+</html>

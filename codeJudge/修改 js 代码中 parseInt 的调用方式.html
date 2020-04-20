@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改 js 代码中 parseInt 的调用方式</title>
+    <script>
+        window.onload = function () {
+            let str1 = 'asd1367sds6215415xxsax';
+            let str2 = '942506492@qq.com';
+            let str3 = '‪E:\\desktop\\test.txt'
+            let res = str1.replace(/\d+/g, function (a,k,v) {
+                console.log(a,k,v)//匹配中的项
+                // console.log(k)//匹配项在字符串中的位置
+                 //console.log(v)
+            })
+            let reg1 = /\w+([-+.]\w)*@\w+([-.]\w)*\.\w+([-.]\w)*$/g
+            //console.log(res)
+        }
+        function parse2Int(num) {
+            var reg = /^\d$?/g
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../lib/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <title>下拉框懒加载指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <el-select v-model="value" filterable v-el-select-loadmore="loadmore">
+                <el-option v-for="item in options" :value="item.value" :label="item.label" :key="item.value">
+                </el-option>
+            </el-select>
+        </div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            value: '',
+            options: [{
+                value: 'a',
+                label: '北京'
+            }, {
+                value: 'b',
+                label: '上海'
+            }, {
+                value: 'c',
+                label: '广州'
+            }, {
+                value: 'd',
+                label: '深圳'
+            }, {
+                value: 'e',
+                label: '成都'
+            }, {
+                value: 'f',
+                label: '杭州'
+            }, {
+                value: 'h',
+                label: '南京'
+            }, {
+                value: 'i',
+                label: '天津'
+            }, {
+                value: 'j',
+                label: '吉林'
+            }],
+            options2: [{
+                value: 'A',
+                label: '天涯'
+            }, {
+                value: 'B',
+                label: '海角'
+            }, {
+                value: 'C',
+                label: '地狱'
+            }, {
+                value: 'D',
+                label: '刀山'
+            }, {
+                value: 'E',
+                label: '火海'
+            }],
+            pageIndex: 1,
+            pageSize: 3,
+        },
+        directives: {
+            'el-select-loadmore': {
+                bind(el, binding) {
+                    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+                    SELECTWRAP_DOM.addEventListener('scroll', function () {
+                        const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+                        /**
+                        * scrollHeight 获取元素内容高度(只读)
+                        * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+                        * clientHeight 读取元素的可见高度(只读)
+                        * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+                        * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+                        */
+                        if (CONDITION) {
+                            binding.value()
+                        }
+                    })
+
+                }
+            }
+        },
+        methods: {
+            loadmore() {
+                //实际开发中换成你的请求
+                this.pageIndex ++;
+                if(this.pageIndex <= this.pageSize){
+                    this.options = [...this.options, ...this.options2]
+                }
+               
+            }
+        }
+    })
+</script>
+
+</html>

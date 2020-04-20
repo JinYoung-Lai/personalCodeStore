@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>13.3.1 DOM中的事件</title>
+</head>
+
+<body>
+  <div>
+    <button id="btn">按钮</button>
+    <button id="btn2">按钮2</button>
+    <button id="btn3">按钮3</button>
+  </div>
+</body>
+<script>
+  window.onload = function () {
+    let btn = document.getElementById('btn');
+    btn.onclick = (e) => {
+      console.log(e.target === this); // false
+      console.log(e.currentTarget === this) // false
+    }
+
+    let btn2 = document.getElementById('btn2');
+    btn2.onclick = function (e) {
+      console.log(e.target === this); // true
+      console.log(e.currentTarget === this) // true
+    }
+    //事件冒泡
+    document.body.onclick = function (event) {
+      console.log(event.currentTarget === document.body); //true
+      console.log(this === document.body); //true
+      console.log(event.target === document.getElementById("btn2")); //true
+    };
+
+    //stopPropagation()
+    let btn3 = document.getElementById('btn3');
+    btn3.onclick = function(e){
+      alert('Clicked');
+      event.stopPropagation();
+    }
+    document.body.onclick = function(e){
+      alert("Body Clicked!")
+    }
+  }
+
+</script>
+
+</html>

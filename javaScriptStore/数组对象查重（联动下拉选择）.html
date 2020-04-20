@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数组对象查重（联动下拉选择）</title>
+    <script src="../lib/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id='root'>
+        <el-select v-model="value" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+        </el-select>
+        <el-select v-model="value2" placeholder="请选择">
+            <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+        </el-select>
+        <el-button @click="add">add</el-button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+
+            el: '#root',
+            data: {
+                show: true,
+                value: '',
+                value2: '',
+                options: [{
+                    value: 'a',
+                    label: '北京'
+                }, {
+                    value: 'b',
+                    label: '上海'
+                }, {
+                    value: 'c',
+                    label: '广州'
+                }, {
+                    value: 'd',
+                    label: '深圳'
+                }, {
+                    value: 'e',
+                    label: '成都'
+                }],
+                options2: [{
+                    value: 'A',
+                    label: '黄金糕'
+                }, {
+                    value: 'B',
+                    label: '双皮奶'
+                }, {
+                    value: 'C',
+                    label: '蚵仔煎'
+                }, {
+                    value: 'D',
+                    label: '龙须面'
+                }, {
+                    value: 'E',
+                    label: '北京烤鸭'
+                }],
+                newArr: []
+            },
+            methods: {
+                add() {
+                    let obj = { val: this.value, val2: this.value2 }
+                    //首先判断数组是否为空, some() 不会对空数组进行检测, some() 不会改变原始数组。
+                    if (this.newArr.length > 0) {
+                        let res = this.newArr.some(item => {
+                            //判断当前选中的值是否在数组里面。
+                            return (item.val == this.value && item.val2 == this.value2)
+                        })
+                        //如果没有push进数组，否则给出提示，
+                        if (!res) {
+                            this.newArr.push(obj);
+                        } else {
+                            alert('不能重复选择该选项！')
+                        }
+                    } else {
+                        this.newArr.push(obj);//如果是空数组直接push
+                    }
+                    console.log(this.newArr);
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

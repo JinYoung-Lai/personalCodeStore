@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        .border {
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <canvas id="tutorial" class="border" width="150" height="150">
+            current stock price: $3.15 +0.15
+        </canvas>
+        <canvas id="tutorial2"  class="border" width="200" height="150">
+
+        </canvas>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var canvas = document.getElementById('tutorial');
+        var canvas2 = document.getElementById('tutorial2');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            //绘制矩形
+            ctx.fillStyle = 'rgb(200,0,0)';
+            ctx.fillRect(10, 10, 55, 50);
+            ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+            ctx.fillRect(0, 0, 75, 70);
+            //绘制路径
+            ctx.beginPath();//开始画线
+            ctx.moveTo(75, 50);//画笔移动到什么地方
+            ctx.lineTo(100, 75);//画直线到什么地方
+            ctx.lineTo(100, 25);
+            ctx.fill();//填充线所包围的空间
+            //圆、弧度
+            var ctx2 = canvas2.getContext('2d');
+            for (var i = 0; i < 4; i++) {
+                for (var j = 0; j < 3; j++) {
+                    ctx2.beginPath();
+                    var x = 25 + i * 50;
+                    var y = 25 + j * 50;
+                    var radius = 20;
+                    var startAngle = 0;
+                    var endAngle = Math.PI + (Math.PI * j)/2
+                    var anticlockwise = i % 2 == 0 ? false : true;
+                    ctx2.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+                    if (i > 1) {
+                        ctx2.fill()
+                    } else {
+                        ctx2.stroke();
+                    }
+                }
+            }
+
+        } else {
+            alert('不支持')
+        }
+
+
+    }
+
+</script>
+
+</html>

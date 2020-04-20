@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    window.onload = function () {
+        for (var i = 0; i < 10; i++) {
+            setTimeout(
+                function () {
+                    console.log(i);
+                }, 1000);
+        }
+        // for (var i = 0; i < 10; i++) {
+        //     setTimeout(
+        //         function () {
+        //             console.log(i);
+        //         }(i), 1000);
+        // }
+
+
+
+        function init() {
+            var name = 'young';
+            function show() {
+                console.log(name);
+            }
+            return show;
+        }
+        function fun2() {
+            var firstName = 'jin';
+            var c = init();
+            c();
+        }
+        fun2()
+
+
+        function makeAdder(x) {
+            console.log(x);//5       
+            return function (y) {
+                console.log(y);//2         
+                return x + y;
+            };
+        }
+        var add5 = makeAdder(5);
+        var add10 = makeAdder(10);
+
+        console.log(add5(2));  // 7
+        console.log(add10(2)); // 12
+
+        if([]){
+            alert(-1)
+        }
+    }
+</script>
+
+</html>

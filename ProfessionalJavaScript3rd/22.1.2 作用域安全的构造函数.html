@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>22.1.2 作用域安全的构造函数</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    function Person(name, age, job) {
+      if (this instanceof Person) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.getArea = function () {
+          return 0;
+        }
+      } else {
+        return new Person(name, age, job)
+      }
+    }
+
+    function Polygon(sides) {
+      if (this instanceof Polygon) {
+        this.sides = sides;
+        return 0;
+      } else {
+        return new Polygon(sides);
+      };
+
+    }
+
+    function Rectangle(width, height) {
+      Polygon.call(this, 2);
+      this.width = width;
+      this.height = height;
+      this.getArea = function () {
+        return this.width * this.height;
+      }
+    }
+
+    let rect = new Rectangle(5, 10);
+    console.log(rect.sides)
+  }
+</script>
+
+</html>

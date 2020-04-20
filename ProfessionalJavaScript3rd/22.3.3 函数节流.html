@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>22.3.3　函数节流</title>
+</head>
+<body>
+  <button id="btn">click</button>
+</body>
+<script>
+  window.onload = function(){
+    let processor = {
+      timeout: null,
+      performProcessing: function(){
+        console.log(1)
+      },
+      process: function(){
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          this.performProcessing();
+        },500)
+      }
+    }//processor
+
+    let btn = document.getElementById('btn')
+    btn.onclick = function(){
+      processor.process()
+    }
+
+    function throttle(method, context){
+      clearTimeout(method.tId);
+      method.tId = setTimeout(function(){
+        method.call(context)
+      }, 100)
+    }
+    
+
+
+  }//window
+</script>
+</html>

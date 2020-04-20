@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.1.4 检测类型</title>
+</head>
+<body>
+    <script>
+        window.onload = function(){
+            let arr = [];
+            let reg = /[0-9][a-z]/
+            console.log(arr instanceof Array);
+            console.log(reg instanceof RegExp);
+
+            //算公积金，代码源自生活
+            let base = 8000;
+            let i = 720;
+            let j = 1590;
+            let x = 0;
+            while((j-i)*x < base){
+                x++;
+                console.log(x);    
+            }
+            console.log(typeof(undefined)) // undefined
+            console.log(typeof(null)) // object
+        }
+
+    </script>
+</body>
+</html>

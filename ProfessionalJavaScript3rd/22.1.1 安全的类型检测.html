@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>22.1.1 安全的类型检测</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    let array = []
+    console.log(array instanceof Array)
+    //如果value 是在另个frame 中定义的数组，那么以上代码就会返回false。
+    console.log(Object.prototype.toString.call(array))
+    function isArray(value) {
+      return Object.prototype.toString.call(value) == "[object Array]"
+    }
+    function isRegExp(value) {
+      return Object.prototype.toString.call(value) == "[object RegExp]"
+    }
+
+    //区分原生和非原生JavaScript对象
+    let isNativeJSON = window.JSON && Object.prototype.toString.call(JSON) ==
+      "[object JSON]";
+  }
+</script>
+
+</html>

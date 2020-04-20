@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>斐波那契数</title>
+</head>
+<body>
+  
+</body>
+<script>
+  //实现斐波那契数列函数, f(1) = 1, f(2) = 1, f(n) = f(n-1) + f(n-2)（n ≥ 3，n ∈ N*）
+  function fibonacci(n) {
+    //return fibonacci(n-1) + fibonacci(n-2)
+    if(n == 1 || n == 2){
+      return 1
+    }
+    if(n >= 3){
+      return arguments.callee(n-1) + arguments.callee(n-2)
+    }
+  }
+  window.onload = function(){
+    let a = fibonacci(1); //1
+    let b = fibonacci(3); //2
+    let c = fibonacci(9); //34
+    console.log(a)
+    console.log(b)
+    console.log(c);
+    
+  }
+</script>
+</html>

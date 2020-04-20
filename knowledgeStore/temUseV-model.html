@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h1>xxx</h1>
+        <p>xxx121</p><span>121</span><span>121</span>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+
+        function a() {
+            var i = 0;
+            function b() {
+                alert(++i);
+            }
+            return b
+        }
+        var c = a();
+        c();
+
+        var arr1 = [1, 2, 3]
+        var arr2 = [4, 5, 6]
+        console.log(arr1.concat(arr2));
+
+    }
+
+</script>
+<!-- <template>
+    <div id="app">
+        <Model v-model="searchText"></Model>
+        <span>{{searchText}}</span>
+        等价于  
+        <custom-input
+            v-bind:value="searchText" 
+            @input="searchText = $event" 
+        ></custom-input>
+    </div>
+</template>
+<script>
+    import Model from "./components/Model";
+    export default {
+        name: "App",
+        data: function () {
+            return {
+                searchText: ''
+            };
+        },
+        components: {
+            Model
+        }
+    };
+</script> -->
+<!-- 
+<template>
+    <div id="app">
+        <input v-bind:value="value" 
+        @input="$emit('input', $event.target.value)">
+    </div>
+</template>
+<script>
+    export default {
+        props: ["value"],
+    };
+</script> -->
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数值的扩展</title>
+	</head>
+	<body>
+	</body>
+	<script>
+		window.onload = function(){
+			console.log(Number.isInteger(25.0)) //true
+			
+			// (function(global){
+			// 	var floor = Math.floor, isFinite = global.isFinite;
+			// 	Object.defineProperties(Number, 'isInteger', {
+			// 		value: function isInteger(value){
+			// 			return typeof value === 'number' && isFinite(value) &&
+			// 			value > -9007199254740992 && value < 9007199254740992 &&
+			// 			floor(value) === value
+			// 		},
+			// 		configurable: true,
+			// 		enumerable: false,
+			// 		writable: true
+			// 	})
+			// })(this);
+			
+			let a = (0.1 + 0.2 - 0.3) < Number.EPSILON
+			console.log(a)
+			
+			console.log(Math.trunc(1.1)) 
+			
+			let b = 4;
+			b **=3;
+			console.log(b)
+		}
+	</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.2 执行环境</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            eg_1();
+            eg_2();
+        }
+        function eg_1() {
+            let color = 'blue';
+            function changeColor() {
+                if (color == 'blue') {
+                    color = 'red';
+                } else {
+                    color = 'blue';
+                }
+            }
+            changeColor();
+            console.log('Color is now', color); //red
+        }
+        function eg_2() {
+            let color = 'blue';
+            function changeColor() {
+                let anotherColor = 'red';
+                function swapColors() {
+                    let tempColor = anotherColor;
+                    anotherColor = color;
+                    color = tempColor                    
+                    // 这里可以访问color、anotherColor 和tempColor
+                }
+                return swapColors();
+                // 这里可以访问color、anotherColor 
+            }
+            // 这里只能访问color
+            changeColor();
+            console.log('Color is now', color); //red
+        }
+    </script>
+</body>
+
+</html>

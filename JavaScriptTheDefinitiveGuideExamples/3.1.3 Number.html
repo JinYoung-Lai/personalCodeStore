@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Number</title>
+    <script>
+        window.onload = function(){
+            Math.round(.6) // 1
+            Math.ceil(.3) // 1
+            Math.floor(.6) // 0
+            Math.random() // 0<x<1
+            isNaN('xxx')// true;
+            isNaN(21) // false
+            let zero = 0;
+            let negz = -0;
+            console.log(zero === negz); // true
+            console.log(1/zero === 1/negz); // false infinity and -infinity are not equal
+            console.log('2'+3+4);   //234
+            console.log(2+'3'+4);   //234
+            
+            
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

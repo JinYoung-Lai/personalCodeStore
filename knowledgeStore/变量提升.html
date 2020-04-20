@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量提升</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app"> 
+
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var vm = new Vue({
+            el: '#app',
+            data:{}
+        });
+
+        //console.log(x);
+        var a = document.getElementById('c');
+        console.log(a);
+        
+        console.log(v1);
+        var v1 = 100;
+        function foo (){
+            console.log(v1);
+            var v1 = 200;
+            console.log(v1);           
+        }
+        foo();
+        console.log(v1);
+
+ // undefined
+//  undefined
+//  200
+//  100
+        
+    }
+</script>
+</html>

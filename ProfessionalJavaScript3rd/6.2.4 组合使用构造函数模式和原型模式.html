@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6.2.4 组合使用构造函数模式和原型模式</title>
+</head>
+<body>
+  <script>
+    window.onload = () => {
+      /* 首先了解为什么要有组合使用构造函数和原型模式，因为构造函数和原型模式都有各自的缺陷，
+         构造函数缺陷：
+           使用构造函数，最大的问题是每个方法都要在每个实例上创建一遍，即使把函数定义转移到
+           构造函数外部来，对象需要定义很多方法时，那么就要定义很多个全局函数，于是我们这个
+           自定义的引用类型就丝毫没有封装性可言了。
+         原型模式缺陷：
+           原型模式将方法和所有属性直接添加到了构造函数（空）的prototype 属性中，从而解决了
+           构造函数中的缺陷，但是也有新的缺陷出现，原型中包含引用类型的属性来说，问题就比较
+           突出了，以下示例反应了原型模式缺陷。    
+      */
+
+      // 原型中包含引用类型
+      function Person () {}
+      // 简写原型
+      Person.prototype = {
+        constructor: Person, // 这种写法下的constructor熟悉可遍历
+        name: "Nicoo",
+        age: 10,
+        friends: ['Anni', 'Aixi'],
+        sayName: function(){
+          console.log(this.name);
+        }
+      }
+      let person_1 = new Person();
+      let person_2 = new Person();
+
+      person_1.friends.push('van');
+
+      console.log(person_1.friends); // ["Anni", "Aixi", "van"]
+      console.log(person_2.friends); // ["Anni", "Aixi", "van"]
+      console.log(person_1.friends === person_2.friends); // true
+
+
+      // 组合使用构造函数模式和原型模式 
+      /* 这种构造函数与原型混成的模式，是目前在ECMAScript 中使用最广泛、
+         认同度最高的一种创建自定义类型的方法。可以说，这是用来定义引用类型
+         的一种默认模式。 
+      */
+      function PersonConPro(name, age, job){
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.friends = ['Shellry', 'Daian'];
+      }
+      PersonConPro.prototype = {
+        constructor: PersonConPro,
+        sayName: function (){
+          console.log(this.name);
+        }
+      }
+      let personConPro_1 = new PersonConPro('DiaanWang', 18, 'singer');
+      let personConPro_2 = new PersonConPro('Jiela', 19, 'games');
+
+      personConPro_1.friends.push('vant');
+      console.log(personConPro_1.friends); // ["Shellry", "Daian", "vant"]
+      console.log(personConPro_2.friends); // ["Shellry", "Daian"]
+      console.log(personConPro_1.friends === personConPro_2.friends); // false
+      console.log(personConPro_1.sayName === personConPro_2.sayName); // true
+
+
+    }
+  </script>
+</body>
+</html>

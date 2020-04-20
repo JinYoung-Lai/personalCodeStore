@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>14.2.3 自动切换焦点</title>
+  <style>
+    .inputbox{
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    <input class="inputbox" type="text" name="tel1" id="txtTel1" maxlength="1" required>
+    <input class="inputbox" type="text" name="tel2" id="txtTel2" maxlength="1">
+    <input class="inputbox" type="text" name="tel3" id="txtTel3" maxlength="1">
+    <input class="inputbox" type="text" name="tel4" id="txtTel4" maxlength="1">
+    <input class="inputbox" type="text" name="tel5" id="txtTel5" maxlength="1">
+    <input class="inputbox" type="text" name="tel6" id="txtTel6" maxlength="1">
+    <button type="submit">提交</button>
+  </form>
+
+</body>
+<script>
+  window.onload = function () {
+    (function () {
+      function tabForward(event) {
+        let target = event.target;
+        if (target.value.length == target.maxLength) {
+          let form = target.form;
+          console.log(form)
+          let len = form.elements.length;
+          for (let i = 0; i < len; i++) {
+            if (form.elements[i] == target) {
+              if (form.elements[i + 1]) {
+                form.elements[i + 1].focus();
+              }
+              return;
+            }
+          }
+        }
+      }
+
+      let textbox1 = document.getElementById("txtTel1");
+      let textbox2 = document.getElementById("txtTel2");
+      let textbox3 = document.getElementById("txtTel3");
+      let textbox4 = document.getElementById("txtTel4");
+      let textbox5 = document.getElementById("txtTel5");
+      let textbox6 = document.getElementById("txtTel6");
+      
+      textbox1.addEventListener('keyup', tabForward);
+      textbox2.addEventListener('keyup', tabForward);
+      textbox3.addEventListener('keyup', tabForward);
+      textbox4.addEventListener('keyup', tabForward);
+      textbox5.addEventListener('keyup', tabForward);
+      textbox6.addEventListener('keyup', tabForward);
+    })()
+
+  }
+</script>
+
+</html>

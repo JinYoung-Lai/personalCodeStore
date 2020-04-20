@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>深拷贝和浅拷贝</title>
+</head>
+<body>
+  
+</body>
+<script>
+  window.onload = function(){
+    let person = {
+      name:'Anni',
+      age:18,
+      job:'Master',
+      skill: function(){
+        console.log("Did you saw my little bear!")
+      },
+      food:{
+        fruit:'apple',
+        vegetables:'cucumber',
+        meat:{
+          red:'beef',
+          white:'chiken',
+          vifrification:'shrimp',
+          other:{
+            a:'aaa',
+            b:'bbb',
+            c:'ccc'
+          }
+        }
+      }
+    }  
+    // 浅拷贝第一种方法
+    function simpleCopy(obj){
+      let newObj = {};
+      for(let item in obj){
+        newObj[item] = obj[item];
+      }
+      return newObj
+    }
+    
+    let clonePerson = simpleCopy(person);
+    //console.log(clonePerson)
+    clonePerson.name = 'tom'
+    clonePerson.food.fruit = 'banana'
+    clonePerson.food.meat.red = 'pork';
+    console.log(clonePerson)
+    console.log(person) 
+    // 浅拷贝除了最外层没有改变person.name的属性，深层的把原来的对象属性一起改变了。
+
+    // 浅拷贝第二种方法 assign
+    let clonePerson_2 = Object.assign({}, person);
+    console.log('clonePerson_2', clonePerson_2)
+    person.name = 'what'
+    person.food.meat.other.a = 'ddd'
+    console.log('clonePerson_2_changed', clonePerson_2)
+    // 浅拷贝原始对象属性改变后，拷贝的对象属性也跟着变了，不能摆脱原始属性的控制
+
+
+    /* -----深拷贝-----*/
+    // 第一种方法
+    function deepClone(initalObj, finalObj){
+      let obj = initalObj || {};
+      for(let i in initalObj){
+        let prop = initalObj[i];
+        if(prop === obj){
+          continue;
+        }
+        if(typeof prop === 'object'){
+          obj[i] = (prop.constructor === Array) ? [] : {};
+          arguments.callee(prop, obj[i]);
+        }else{
+          obj[i] = prop;
+        }
+      }
+      return obj;
+    }
+
+    // 第二种方法
+    let createCloneObj = Object.create(oldObj)
+
+    // 第三种方法
+    let jsonCloneObj = JSON.parse(JSON.stringify(oldObj))
+  }
+</script>
+</html>

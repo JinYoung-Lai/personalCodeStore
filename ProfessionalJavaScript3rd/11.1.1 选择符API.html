@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>11.1.1 选择符API</title>
+</head>
+
+<body>
+  <div id="myDiv" class="my-div">
+
+  </div>
+</body>
+<script>
+  window.onload = function () {
+    let body = document.querySelector("body");
+    console.log(body);
+    // 取得某<div>中的所有<em>元素（类似于getElementsByTagName("em")）
+    let ems = document.getElementById("myDiv").querySelectorAll("em");  
+    let mydiv = document.body.webkitMatchesSelector("body.div")
+    console.log(mydiv);
+  }
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		 <script src="../lib/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(item, index) in groceryList" :key="item.id" >
+				{{item.text}}
+				<button @click="remove(index)">移除</button>
+				</li>
+				
+			</ul>
+			<div>
+				<input placeholder="输入id" v-model="form.id"/>
+				<input placeholder="输入text" v-model="form.text"/>
+				<button @click="add">ADD</button>
+			</div>
+		</div>
+	</body>
+	<script>
+		window.onload = function(){
+			new Vue({
+				el: '#app',
+				data:{
+					form:{
+						id:'',
+						text:''	
+					},
+					groceryList: [
+					      { id: 0, text: '蔬菜' },
+					      { id: 1, text: '奶酪' },
+					      { id: 2, text: '随便其它什么人吃的东西' }
+					    ]
+				},
+				methods:{
+					remove(index){
+						this.groceryList.splice(index, 1)
+					},
+					add(){
+						this.groceryList.push(this.form)
+					}
+				}
+			})
+		}
+	</script>
+</html>

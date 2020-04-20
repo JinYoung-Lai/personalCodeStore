@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>22.1.3 惰性载入函数</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // 只需要做一次判断且经常要调用的函数
+  /*在这个惰性载入的createXHR()中，if 语句的每一个分支都会为createXHR 变量赋值，有效覆
+  盖了原有的函数。最后一步便是调用新赋的函数。下一次调用createXHR()的时候，就会直接调用被
+  分配的函数，这样就不用再次执行if 语句了。*/
+  function createXHR() {
+    if (typeof XMLHttpRequest != "undefined") {
+      createXHR = function () {
+        return new XMLHttpRequest();
+      }
+    } else if (typeof ActiveXObject != "undefined") {
+      createXHR = function () {
+        if (typeof arguments.callee.activeXString != "string") {
+          var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0",
+            "MSXML2.XMLHttp"],
+            i, len;
+          for (i = 0, len = versions.length; i < len; i++) {
+            try {
+              new ActiveXObject(versions[i]);
+              arguments.callee.activeXString = versions[i];
+              break;
+            } catch (ex) {
+              //skip
+            }
+          }
+        }
+        return new ActiveXObject(arguments.callee.activeXString);
+      };
+    } else {
+      createXHR = function () {
+        throw new Error("No XHR object available.");
+      };
+    }
+    return createXHR();
+  }
+
+  //第二种方法
+  const createXHR_secondeMethod = (function () {
+    if (typeof XMLHttpRequest != "undefined") {
+      return function () {
+        return new XMLHttpRequest();
+      };
+    } else if (typeof ActiveXObject != "undefined") {
+      return function () {
+        if (typeof arguments.callee.activeXString != "string") {
+          var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0",
+            "MSXML2.XMLHttp"],
+            i, len;
+          for (i = 0, len = versions.length; i < len; i++) {
+            try {
+              new ActiveXObject(versions[i]);
+              arguments.callee.activeXString = versions[i];
+              break;
+            } catch (ex) {
+              //skip
+            }
+          }
+        }
+        return new ActiveXObject(arguments.callee.activeXString);
+      }
+    } else {
+      return function () {
+        throw new Error("No XHR object available.")
+      }
+    }
+  })();
+</script>
+
+</html>

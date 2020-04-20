@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.1.3 传递参数</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            function setName(obj) {
+                obj.name = 'nikou';
+                obj = new Object();
+                obj.name = 'baba';
+            }
+            let person = new Object();
+            setName(person);
+            console.log(person.name);   // nikou
+
+            // 按值传递：传递的是值的拷贝，也就是说传递后就互不相关了。
+            // 引用传递：指的是在方法调用时，传递的参数是按引用进行传递，
+            //          其实传递的引用的地址，也就是变量所对应的内存空间的地址。
+
+            /* 当接下来再访问person.name 时，显示的值仍然是"nikou"。这说明
+            即使在函数内部修改了参数的值，但原始的引用仍然保持未变。实际上，当在函数内部重写obj 时，这
+            个变量引用的就是一个局部对象了。而这个局部对象会在函数执行完毕后立即被销毁 */
+        }
+    </script>
+</body>
+
+</html>

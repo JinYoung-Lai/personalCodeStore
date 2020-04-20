@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组对拷</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  
+  window.onload = function () {
+    function unique_reduce(arr, _key) {
+      let obj = {}
+      let newArr = arr.reduce((prev, next) => {
+        //prev 初始值, 或者计算结束后的返回值。
+        //next 当前元素
+        //判断是否为true
+        obj[next[_key] + typeof next[_key]] ? '' :
+          obj[next[_key] + typeof next[_key]] = true && prev.push(next); //为false时，先设为true，然后push进新数组           
+        return prev
+      }, [])
+      return newArr
+    }
+
+    //已知a1, 根据a2数据,得到a3,   
+    //type保持不变为-1，增加为0，编辑修改了为1，删除了为2
+    let a1 = [{name:1,type:-1,num:2,class:'a'},{name:2,type:-1,num:5,class:"b"},{name:3,type:-1,num:5,class:"b"},{name:4,type:-1,num:8,class:"b"}];
+    let a2 = [                                 {name:2,type:-1,num:5,class:"b"},{name:3,type:-1,num:3,class:"b"},{name:4,type:-1,num:8,class:"c"},{name:5,type:-1,num:3,class:"d"}];
+    let a3 = [{name:1,type:2,num:2,class:'a'}, {name:2,type:-1,num:3,class:"b"},{name:3,type:1,num:3,class:"b"}, {name:4,type:1,num:8,class:"c"}, {name:5,type:0,num:3,class:"d"}];
+    
+    
+    for(let i = 0; i < a2.length; i++){
+      let itemA2 = a2[i];
+      a1.forEach(item => {
+        //console.log(item)
+        if(itemA2.name == item.name ){
+          if(itemA2.num != item.num || itemA2.class != item.class){
+            item.type = 1
+            item.num = itemA2.num;
+            item.class = itemA2.class;
+          }else{
+            item.type = -1
+          }
+        }
+      })
+    }
+    
+    let a1NameArr = []
+    let a2NameArr = []
+
+    a1.forEach((item, index) => {
+      a1NameArr.push(item.name)
+    })
+
+    a2.forEach((item, index) => {
+      a2NameArr.push(item.name)
+    })
+
+    a1.forEach((item, key) => {
+      if(a2NameArr.indexOf(item.name) == -1){
+        item.type = 2;
+      }
+    })
+
+    a2.forEach((item, key) => {
+      if(a1NameArr.indexOf(item.name) == -1){
+        item.type = 0
+        a1.push(item);
+      }
+      
+    })
+
+    console.log(a1)
+
+  }
+</script>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        let arr = [12, 7, 31, 4, 6, 8, 21, 23, 11, 23, 56, 72, 50, 21, 44];
+        oddN_evenN(arr)
+    }
+    function sortNum(a,b){
+        return a-b;
+    }
+    function oddN_evenN(arr) {
+        let arr1 = [];
+        let arr2 = [];
+        let arrNew = arr.sort(sortNum);
+        console.log(arrNew);
+        for (let item of arrNew) {
+            if (item % 2 == 0) {
+                arr2.push(item)
+            }else{
+                arr1.push(item)
+            }
+        }
+        console.log(arr1.concat(arr2));
+        
+
+    }
+</script>
+
+</html>

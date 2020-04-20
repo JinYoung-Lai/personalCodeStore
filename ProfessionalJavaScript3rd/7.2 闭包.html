@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>7.2 闭包</title>
+</head>
+
+<body>
+  <script>
+    window.onload = function () {
+      function cf(){
+        let res = new Array();
+        for(var i = 0; i < 10; i++){
+          res[i] = function(){
+            return i;
+          }
+        }
+        return res;
+      }
+      console.log(cf())
+      function cf2(){
+        let res = new Array();
+        for(var i = 0; i < 10; i++){
+          res[i] = function(num){
+            return function(){
+              return num
+            };
+          }(i)
+        }
+        // console.log(res)
+        return res;
+      }
+      // console.log(cf2())
+
+    }  
+  </script>
+</body>
+
+</html>

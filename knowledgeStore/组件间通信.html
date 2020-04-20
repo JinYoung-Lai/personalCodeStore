@@ -1,0 +1,200 @@
+<!-- 组件间通信，这个demo测试了$root、$parent、$refs、$children访问组件的实例
+      同时测试了通过eventbus来实现兄弟组件间通讯 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>eventBUS</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    
+    <div id="app">
+        父组件：
+        <button @click="call_refs">
+            通过$refs访问组件A实例
+        </button>
+        <button @click="call_child">
+            访问子组件实例
+        </button>
+        <div style="border:1px dashed blue;padding: 10px; margin-top: 10px;">
+            <my-a ref="component_A"></my-a>
+            <hr>
+            <my-b></my-b>
+            <hr>
+            <my-c>
+            </my-c>
+            <hr>
+            <child-component></child-component>
+        </div>
+
+    </div>
+    <template id="a">
+        <div>
+            <h3>A组件：{{name}}</h3>
+            <input v-model="name">
+            <button @click="send">将名字发送给B</button>
+        </div>
+    </template>
+
+    <template id="b">
+        <div>
+            <h3>B组件：</h3>
+            <div>
+                <span>我的名字是:{{name}}, 年龄:{{age}}</span>
+            </div>
+            <input v-model="age">
+
+            <button @click="send">将名字、年龄发送给C</button>
+        </div>
+    </template>
+
+    <template id="c">
+        <div>
+            <h3>C组件：我的名字是{{name}},年龄{{age}}</h3>
+            <button @click="callRoot">
+                访问根组件实例
+            </button>
+        </div>
+    </template>
+
+    <template id="child-component">
+        <div class="child">
+            <h3>我是子组件</h3>
+            <p>
+                <button v-on:click="showParentData">显示父组件数据</button><span>{{parentMsg}}</span>
+            </p>
+        </div>
+    </template>
+</body>
+<script>
+    // 引入一个新的vue实例
+    var Event = new Vue()
+
+    var A = {
+        template: '#a',
+        data() {
+            return {
+                name: ''
+            }
+        },
+        methods: {
+            // 发送A组件数据出去
+            send() {
+                Event.$emit('data-a-name', this.name);
+            },
+            // A组件实例
+            showA(component) {
+                alert(`组件间访问实例！${component}访问了A`)
+            }
+        }
+    }
+    var B = {
+        template: '#b',
+        data() {
+            return {
+                name: '',
+                age: '',
+                parent_C_Msg: '我是C组件'
+            }
+        },
+        mounted() {
+            // 接受A组件数据
+            Event.$on('data-a-name', name => {
+                this.name = name
+            })
+        },
+        methods: {
+            // 发送B组件数据
+            send() {
+                Event.$emit('data-b-name', this.name);
+                Event.$emit('data-b-age', this.age);
+
+            }
+        },
+
+    }
+    var C = {
+        template: '#c',
+        data() {
+            return {
+                name: '',
+                age: '',
+            }
+        },
+        mounted() {
+            //接受B组件传来的数据
+            Event.$on('data-b-name', name => {
+                this.name = name;
+            }),
+            Event.$on('data-b-age', age => {
+                this.age = age;
+            })
+        },
+        methods: {
+            // 组件c通过$root访问了根组件的实例showRoot
+            callRoot() {
+                this.$root.showRoot('C')
+                alert(`${this.$root.rootMsg}`)
+            },
+            showC() {
+                alert('我是c组件！')
+            }
+        },
+
+    }
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            rootMsg: '我是根组件的数据',
+            parentMsg:'我是父组件数据'
+        },
+        components: {
+            'my-a': A,
+            'my-b': B,
+            'my-c': C,
+            'child-component': {
+                template: '#child-component',
+                data() {
+                    return {
+                        parentMsg: '',
+                        rootMsg: '',
+                        childrenMsg:'子组件'
+                    }
+                },
+                methods: {
+                    // 通过$parent访问父组件实例
+                    showParentData() {
+                        this.parentMsg = this.$parent.parentMsg;
+                    },
+                    showChild(){
+                        alert('父组件通过$children访问子实例！')
+                    }
+                }
+            }
+        },
+        methods: {
+            // 父组件的实例
+            showRoot(component) {
+                alert(`组件间访问根实例！${component}访问了根实例`)
+            },
+            // 根组件通过$refs访问了组件A的实例
+            call_refs() {
+                this.$refs.component_A.showA('rootComponent')
+            },
+            // 访问子组件实例
+            call_child(){
+                //this.$children返回的 是子组件集合，需要通过下标来访问指定组件
+                alert(`父组件通过$children访问${this.$children[3].childrenMsg}实例！`)
+            }
+        }
+
+    })
+
+
+</script>
+
+
+</html>

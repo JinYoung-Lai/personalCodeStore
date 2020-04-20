@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>html输出json</title>
+</head>
+<body>
+  <pre id="loginresult"></pre>
+</body>
+<script>
+  window.onload = function(){
+    var songResJson = {
+				"service": "ALL",
+				"qt": 581,
+				"content": {
+					"answer": {
+						"song": "你能看到我",
+						"album": "是的,我看见了",
+						"artist": "啊哈......",
+						"pic_url": "http://p1.music.126.net/-u3WgIXsFNCW7d8Jy7pCEA==/5921969627395387.jpg"
+					},
+
+					"scene": "music"
+				}
+			}
+
+			document.getElementById('loginresult').innerHTML = writeJson(songResJson);
+  }
+
+  function writeJson(json) {
+			if (typeof json != 'string') {
+				json = JSON.stringify(json, undefined, 2);
+			}
+			json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+			return json.replace(
+				/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+				function(match) {
+					var cls = 'number';
+					if (/^"/.test(match)) {
+						if (/:$/.test(match)) {
+							cls = 'key';
+						} else {
+							cls = 'string';
+						}
+					} else if (/true|false/.test(match)) {
+						cls = 'boolean';
+					} else if (/null/.test(match)) {
+						cls = 'null';
+					}
+					return '<span class="' + cls + '">' + match + '</span>';
+				});
+		}
+</script>
+</html>

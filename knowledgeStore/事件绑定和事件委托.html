@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件绑定和事件委托</title>
+</head>
+
+<body>
+    <div id="div">
+        <div class="div1">div1</div>
+        <div class="div2">div2</div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        let div = document.getElementById('div');
+        div.addEventListener('click', function (e) {
+            console.log(e.target);
+
+        })
+        let div3 = document.createElement('div');
+        div3.setAttribute('class', 'div3');
+        div3.innerHTML = 'div3';
+        div.appendChild(div3);
+        //虽然没有给div1和div2添加点击事件,但是无论是点击div1还是div2,都会打印当前节点。
+        //因为其父级绑定了点击事件,点击div1后冒泡上去的时候,执行父级的事件。
+
+        // 事件委托的优点:
+        // 提高性能:每一个函数都会占用内存空间，只需添加一个事件处理程序代理所有事件,所占用的内存空间更少。
+        // 动态监听:使用事件委托可以自动绑定动态添加的元素,即新增的节点不需要主动添加也可以一样具有和其他元素一样的事件。
+    }
+</script>
+
+</html>

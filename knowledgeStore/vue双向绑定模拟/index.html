@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="tesBtn">
+
+  </button>
+  <input type="text">
+</body>
+<script>
+  window.onload = function () {
+    var btn = document.getElementById('tesBtn');
+
+
+    // var Book = {}
+    // var name = '';
+    // Object.defineProperty(Book, 'name', {
+    //   get: function() { // 获取name的值
+    //     return name
+    //   },
+    //   set: function(value){
+    //     name = value; // 改变name的值
+    //     console.log('book name is' + value);
+    //   }
+    // })
+
+    // Book.name = 'JavaScript高级程序设计';
+    // console.log(Book.name);
+
+    /**
+     * 把一个对象的每一项都转化成可观测对象
+     * @param { Object } obj 对象
+     */
+    function observale(obj) {
+      if (!obj || obj !== 'object') {
+        return;
+      }
+      let keys = Object.keys(obj);
+      keys.forEach((key) => {
+        defeineRacctive(obj, key, val)
+      });
+      return obj;
+    }
+    /**
+    * 使一个对象转化成可观测对象
+    * @param { Object } obj 对象
+    * @param { String } key 对象的key
+    * @param { Any } val 对象的某个key的值
+    */
+    function defeineRacctive(obj, key, val) {
+      Object.defineProperty(obj, key, {
+        get() {
+          console.log(`${key}属性被读取了`);
+          return val;
+        },
+        set(newVal) {
+          console.log(`${key}属性被修改了`);
+          val = newVal
+        }
+      })
+    }
+
+
+    let car = observale({
+      'brand': 'BMW',
+      'price': 3000
+    })
+  }
+</script>
+
+</html>

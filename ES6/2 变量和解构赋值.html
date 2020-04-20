@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  window.onload = function(){
+    let arr_1 = ['a', 'b', 'c'];
+    arr_1 = [1, 2, 3]
+    console.log(arr_1)
+
+    let arr_2 = ['foo', [['bar']], 'baz'];  
+    arr_2 = [1, 2, 3];
+    console.log(arr_2)
+
+    let [, , third] = [1, 2, 3]
+    console.log(third)
+    
+    let [head, ...tail] = [1, 2, 3, 4]
+    console.log(tail)
+
+
+  }
+</script>
+</html>

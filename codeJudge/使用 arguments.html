@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>使用 arguments</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    function useArguments(...num) {
+      let res = 0
+      for (let val of num) {
+        res += val;
+      }
+      return res;
+    }
+    console.log(useArguments(1, 2, 3, 4))
+
+    function useArguments_2() {
+      /*
+      因为参数数量不定，可以先获取参数个数arguments.length
+      然后循环求值
+      */
+      var sum = 0;
+      //循环求值
+      for (var i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
+      }
+      return sum;
+    }
+    console.log(useArguments_2(1, 2, 3, 4))
+  }
+</script>
+
+</html>

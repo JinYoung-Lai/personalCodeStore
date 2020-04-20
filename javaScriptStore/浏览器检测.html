@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main {
+            width: 80%;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .content {
+            width: 600px;
+            margin: 0 auto;
+            line-height: 20px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .btn {
+            padding: 10px 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main">
+        <h1>您好，系统暂不支持IE8及以下版本的IE浏览器，请选择以下方式继续使用本系统：</h1>
+        <div class="content">
+            <p>1、若已安装插件，您可以点击
+                <!-- <a href="http://localhost/#/spws?"></a> -->
+                <input type="button" value="跳转" onclick="todjz()">
+                按钮访问本系统；
+            </p>
+            <p>2、若没有安装谷歌浏览器，您可以点击
+                <input type="button" value="下载" onclick="download()">
+                按钮下载插件，<br />
+                然后再点击第一条的“跳转”按钮打开，或复制链接在IE浏览器打开！
+            </p>
+        </div>
+
+        <!-- <input class="btn" type="button" value="版本检测" onclick="test()"> -->
+    </div>
+</body>
+<script>
+    function download() { }
+    function todjz() {
+        var appid = '4400000002';
+        var token = "ca5aa4f98bdb450784137d346a735739";
+        window.location.href = 'http://localhost/#/login?' + appid + "&token=" + token;
+
+    }
+</script>
+
+</html>

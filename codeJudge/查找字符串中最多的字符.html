@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS找字符串中出现最多的字符</title>
+    <script>
+        window.onload = function () {
+            let arr = [1, 2, 3, 4];
+            let str = 'asdqsadsadqwdq'
+            maxChar(str);
+
+        }
+        function maxChar(str) {
+            let res_str = str.split('').reduce(function (res, cur) {
+                res[cur] ? res[cur]++ : res[cur] = 1;
+                return res
+            }, {})
+            let max = 0;
+            let char = '';
+            for (let key in res_str) {
+                if (max < res_str[key]) {
+                    max = res_str[key];
+                    char = key
+                }
+            }
+            console.log(str + '中出现最多的是' + char, '，出现' + max + '次');
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

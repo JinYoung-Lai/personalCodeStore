@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>二次封装函数</title>
+</head>
+<body>
+  
+</body>
+<script>
+  function partial(fn, str1, str2) {
+    function result(str3) {
+        return fn.call(this, str1, str2, str3);
+    }
+ 
+     return result;
+  }
+</script>
+</html>

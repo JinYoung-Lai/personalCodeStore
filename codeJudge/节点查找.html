@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节点查找</title>
+    <script>
+        window.onload = function () {
+            var a = document.getElementById('span')
+            var b = document.getElementById('p2')
+            //console.log(commomParent(a, b));
+            //console.log(a.parentNode)
+            commomParent(a, b)
+
+        }
+        function commomParent(oNode1, oNode2) {
+            for(;oNode1;oNode1 = oNode1.parentNode){
+                //console.log(oNode1)
+                if(oNode1.contains(oNode2)){
+                    console.log(oNode1)
+                    return oNode1;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="baba">
+    <div>
+        <p>
+            <span id="span"></span>
+        </p>
+    </div>
+    <div>
+        <p id="p2"></p>
+    </div>
+</div>
+</body>
+</html>

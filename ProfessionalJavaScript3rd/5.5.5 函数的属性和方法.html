@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>5.5.5 函数的属性和方法</title>
+</head>
+<body>
+  <script>
+    window.onload = () => {
+      function sayName(name){
+        console.log(name);
+      }
+      function sum(num_1, num_2){
+        return num_1 + num_2;
+      }
+      console.log(sayName.length);
+      console.log(sum.length);
+      
+      function applySum(num_1, num_2){
+        return sum.apply(this, arguments);
+      }
+      function applySumWithArr(num_1, num_2){
+        return sum.apply(this, [num_1, num_2]);
+      }
+
+      function callSum(num_1, num_2){
+        return sum.call(this, 10, 10);
+      }
+      console.log(applySum(10, 10));
+      console.log(applySumWithArr(10, 10));
+      console.log(callSum(10, 10));
+      
+      window.color = 'red';
+      let o = {color: 'blue'};
+      function sayColor(){
+        console.log(this.color);
+      }
+      sayColor();             // red
+      sayColor.call(this);    // red
+      sayColor.call(window);  // red
+      sayColor.call(o)        // blue
+      
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>20.2 解析与序列化</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    let book = {
+      title: 'Professional JavaScript',
+      authors: [
+        'Nicholas C. Zakas'
+      ],
+      edition: 3,
+      year: 2011
+    };
+    let jsonText = JSON.stringify(book);
+    console.log(jsonText);
+    console.log(typeof (jsonText))
+
+
+    /* JSON.stringify()除了要序列化的JavaScript 对象外，
+      还可以接收另外两个参数，这两个参数用于指定以不同的
+      方式序列化JavaScript 对象。*/
+    let jsonFilter = JSON.stringify(book, ['title', 'authors']);
+    console.log(jsonFilter)
+
+    let bookCopy = JSON.parse(jsonFilter);
+    console.log(bookCopy)
+
+    // JSON.stringify()第二个参数是函数
+    let jsonFunc = JSON.stringify(book, (key, value) => {
+      switch (key) {
+        case "authors":
+          return value.join(",")
+        case "year":
+          return 5000;
+        case "edition":
+          return undefined; //通过返回undefined 删除该属性
+        default:
+          return value;
+      }
+    })
+    console.log(JSON.parse(jsonFunc))
+
+    //JSON.stringify()方法的第三个参数用于控制结果中的缩进和空白符
+    console.log(JSON.stringify(book, null, '--'))
+
+    // toJSON()
+    let bookData = {
+      "title": "Professional JavaScript",
+      "authors": [
+        "Nicholas C. Zakas"
+      ],
+      edition: 3,
+      year: 2019,
+      toJSON: function(){
+        return this.title;
+      }
+    }
+    console.log('bookData -', JSON.stringify(bookData))
+
+    // 20.2.3 解析选项
+    let bookJson = {
+      "title": "Professional JavaScript",
+      "authors": [
+        "Nicholas C. Zakas"
+      ],
+      edition: 3,
+      year: 2012,
+      releaseDate: new Date(2020, 11, 1)
+    };
+    let bookjsonText = JSON.stringify(bookJson);
+    let bookjsonCopy = JSON.parse(bookjsonText, function(key, value){
+      if(key == "releaseDate"){
+        return new Date(value);
+      }else{
+        return value;
+      }
+    })
+    console.log('bookjsonCopy', bookjsonCopy.releaseDate.getFullYear())
+
+  }
+</script>
+
+</html>

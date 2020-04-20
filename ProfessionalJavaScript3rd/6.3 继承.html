@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6.3 继承</title>
+</head>
+<body>
+  <script>
+    window.onload = () => {
+      // --------------
+      // 6.3.1 原型链 -
+      // --------------
+      function SuperType(){
+        this.property = true;
+      }
+      SuperType.prototype.getSuperVale = function(){
+        return this.property;       
+      }
+
+      function SubType(){
+        this.subType = false;
+      }
+      // SubType继承SuperType的原型对象
+      SubType.prototype = new SuperType();
+      SubType.prototype.getSubValue = function(){
+        return this.subType;
+      }
+
+      let instance = new SubType();
+      console.log(instance.getSuperVale()); // ->true
+
+      // 重写超类型中的方法
+      SubType.prototype.getSuperVale = function(){
+        return false;
+      }
+      let instance_2 = new SubType();
+      console.log(instance_2.getSuperVale()); // ->false
+
+      // 使用字面量添加新方法，会重写原型, 导致26行代码无效
+      SubType.prototype = {
+        getSuperVale : function(){
+          return '不能用字面量添加新方法！';
+        },
+        otherMethod : function(){
+          return false;
+        }
+      }
+      let instance_3 = new SubType();
+      console.log(instance_3.getSuperVale()); // 不能用字面量添加新方法，会重写原型
+      
+
+
+    }
+  </script>
+</body>
+</html>

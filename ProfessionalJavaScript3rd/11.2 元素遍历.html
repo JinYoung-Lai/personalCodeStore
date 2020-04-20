@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>11.2 元素遍历</title>
+</head>
+
+<body>
+  <script>
+    window.onload = function () {
+      // 跨浏览器遍历某元素的所有子元素
+      function oldMethod() {
+        let i, len, child = element.firstChild;
+        while (child != element.lastChild) {
+          if (child.nodeType == 1) { //检查是不是元素
+            process(child);
+          }
+          child = child.nextSilbing;
+        }
+      }
+
+      function newMethod() {
+        let i, len, child = element.firstElementChild;
+        while(child != element.lastElementChild){
+          processChild(child);
+          child = child.nextElementSibling;
+        }
+      }
+
+
+
+    }
+  </script>
+</body>
+
+</html>

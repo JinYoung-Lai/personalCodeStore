@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./EventUtil.js"></script>
+  <title>14.2.2 过滤输入</title>
+</head>
+<body>
+  <input id="textbox">
+</body>
+<script>
+  window.onload = function(){
+    let textbox = document.getElementById('textbox')
+    // EventUtil.addHander(textbox, 'keypress', function(event){
+    //   event = EventUtil.getEvent
+    // })
+    textbox.addEventListener('keypress', function(event){
+      let target = event.target;
+      let charCode = event.charCode;
+      console.log(String.fromCharCode(charCode))
+      if(!/\d/.test(String.fromCharCode(charCode))){
+        event.preventDefault();
+      }
+    })
+  }
+</script>
+</html>

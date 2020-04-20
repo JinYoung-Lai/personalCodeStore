@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>获取url参数</title>
+    <script>
+        window.onload = function () {
+            var str = "http://www.nowcoder.com?key=a&key=b&key=c&test=d#hehe";
+            //console.log(getUrlPar(str,'test'))
+            console.log(getUrlPar2(str))
+        }
+
+        function getUrlPar2(sUrl, sKey) {
+            var result = {};
+            sUrl.replace(/\??(\w+)=(\w+)&?/g, function (a, k, v) {
+                if (result[k] !== void 0) {
+                    var t = result[k];
+                    result[k] = [].concat(t, v);
+                    //console.log(a);//key=b&、 key=c&、 {key:["a", "b", "c"], test: "d"}
+                    //console.log(k);//key、 key、 {key:["a", "b", "c"], test: "d"}
+                    //console.log(v)//b、 c、 {key:["a", "b", "c"], test: "d"}
+                    //console.log(t)//a、 ["a","b"]、 {key:["a", "b", "c"], test: "d"}
+                    console.log(result)
+                    //{key:["a", "b", "c"], test: "d"}、{key:["a", "b", "c"], test: "d"}、{key:["a", "b", "c"], test: "d"}
+                } else {
+                    result[k] = v;
+                }
+            });
+            if (sKey === void 0) {
+                return result;
+            } else {
+                return result[sKey] || '';
+            }
+        }
+        function getUrlPar(sUrl, sKey) {
+            var val = [];
+            if (sUrl.length > 0) {
+                var aCa = sUrl.split('?');
+                var aPar = aCa[1];
+                var aPararray = aPar.split('&');
+                for (var i = 0; i < aPararray.length; i++) {
+                    var item = aPararray[i];
+                    var itemarr = item.split('=');
+                    if (itemarr[0] == sKey) {
+                        val.push(itemarr[1]);
+                    }
+                }
+            }
+            if (sKey == undefined) {
+                return {}
+            } else {
+                if (val.length == 0) {
+                    return '';
+                } else if (val.length == 1) {
+                    return val[0];
+                } else {
+                    return val
+                }
+            }
+        }
+
+
+        function getUrlPar3(sUrl, sKey){
+            
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

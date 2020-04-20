@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>查找重复元素 </title>
+    <script>
+        //找出数组 arr 中重复出现过的元素
+        window.onload = function () {
+            let arr = [1, 2, 4, 4, 3, 3, 1, 5, 2, 3, 4]; //[1, 3, 4]
+            let str = 'casdfifdsaczsa'
+						let arr2 = [false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN]
+             console.log(duplicates_indexof(arr2));
+            // console.log(duplicates2(arr));
+            // console.log(duplicates3(arr));
+            // console.log(duplicates4(arr));
+            //console.log(searchChart(str));
+            
+            //arr2.unique()
+						//console.log(arr2.unique())
+            let newArr = [...new Set(arr2)];
+            console.log(newArr);
+            
+        }
+        //删除重复元素
+        function duplicates(arr) {
+            var res = [];
+            var obj = {};
+            for (var i of arr) {
+                //console.log(i)//1, 2, 4, 4, 3, 3, 1, 5, 3
+                if (!obj[i]) {
+                    res.push(i)
+                    obj[i] = 1;
+                }
+            }
+            return res
+        }
+        //indexof删除重复元素
+        function duplicates_indexof(arr){
+            let newArr = [];
+            for(const val of arr){
+                if(newArr.indexOf(val) === -1){                    
+                    newArr.push(val)
+                }
+            }
+            return newArr;
+        }
+        //删除重复元素
+        function duplicates2(arr) {
+            var sortArr = arr.sort();
+            var res = [arr[0]];
+            for (var i = 1; i < arr.length; i++) {
+                var j = i - 1;
+                if (sortArr[i] !== sortArr[j]) {
+                    res.push(arr[i]);
+                };
+
+            }
+            return res
+        }
+        //获取重复元素
+        function duplicates3(arr) {
+            var sortArr = arr.sort();
+            var res = [arr[0]];
+            for (var i = 1; i < arr.length; i++) {
+                var j = i - 1;
+                if (sortArr[i] == sortArr[j] && res.indexOf(sortArr[i]) == -1) {
+                    res.push(arr[i]);
+                };
+
+            }
+            return res
+        }
+        function duplicates4(arr) {
+            var res = [];
+            arr.forEach(function (item) {
+                if (arr.indexOf(item) !== arr.lastIndexOf(item) && res.indexOf(item) == -1) {
+                    res.push(item)
+                }
+            })
+            return res
+        }
+
+        //找出字符串中第一次出现的不重复字符？？？
+        function searchChart(str) {
+            for (let item of str) {
+                if (str.indexOf(item) === str.lastIndexOf(item)) {   
+                    return item
+                }
+            }
+            return false
+        }
+				
+				
+				Array.prototype.unique = function(){
+					return [...new Set(this)];
+				}
+				
+				Array.prototype.uniq = function () {
+				    var newArr = [];
+				    var flag = true
+				    for(var i = 0; i < this.length; i++){
+				        if(newArr.indexOf(this[i]) == -1){
+				            if(this[i] != this[i]){  //去除NAN
+				                if(flag){
+				                    newArr.push(this[i]);
+				                    flag = false
+				                }
+				            }else{
+				                 newArr.push(this[i])
+				            }
+				           
+				        }
+				    }
+				    return newArr
+				}
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
