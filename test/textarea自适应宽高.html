@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>textarea自适应高度</title>
+  <style>
+    .divsimulate {
+      width: 100px;
+      border: 1px solid red;
+      word-wrap: break-word;
+      line-height: 20px;
+      padding: 5px;
+    }
+    
+    .box {
+      width: 200px;
+    }
+    
+    .textinput {
+      width: 80%;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- div模拟 -->
+  <div class="divsimulate">
+    adwdwq asdsad dqwdasd
+  </div>
+  <div class="box">
+    <textarea class="textinput" id="textinput">asdasa  asds</textarea>
+  </div>
+
+</body>
+<script>
+  window.onload = function() {
+    let textArea = document.getElementById('textinput')
+    let oWidth = textArea.offsetWidth
+    let oHeight = textArea.offsetHeight
+    let oFontsize = window.getComputedStyle(textArea, null).fontSize
+    let oValue = textArea.value
+    if (oValue) {
+      let length = oValue.length
+      let fontSizeInt = parseInt(oFontsize)
+      let fontWidth = length * fontSizeInt
+        // console.log(oValue.length)
+        // console.log(fontWidth)
+        // console.log(oWidth)
+    }
+
+
+    textArea.addEventListener('keyup', function(event) {
+
+      //autoHeight($event)
+      let e = event
+        //console.log(e.target.value.length)
+      console.log(e.target.style.scrollTop)
+      console.log(e.target.style.paddingTop)
+
+    })
+
+    function autoHeight(e) {
+      let tar = e.target
+    }
+  }
+</script>
+
+</html>
