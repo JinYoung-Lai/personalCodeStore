@@ -1,5 +1,6 @@
 let http = require('http')
 let fs = require('fs')
+let template = require('art-template')
 
 let server = http.createServer()
 
@@ -13,7 +14,7 @@ server.on('request', (req, res) => {
   let t = date.getHours()
   let m = date.getMinutes()
   let time = `${M}/${d} ${t}:${m}`
-  fs.readFile('./template.html', (err, data) => {
+  fs.readFile('./template-apache.html', (err, data) => {
     if (err) {
       return res.end('404 Not Found!')
     }
@@ -23,20 +24,11 @@ server.on('request', (req, res) => {
         return res.end('Can not find www dir!')
       }
       // 生成需要替换的内容
-      let content = ''
-      files.forEach(element => {
-        content += `
-          <tr>
-            <td data-value="node"><a class="icon dir" href="/E:/desktop/personalCodeStore/node">${element}/</a></td>
-            <td class="detailsColumn" data-value="0"></td>
-            <td class="detailsColumn" data-value="1509589967">${time}</td>
-          </tr>
-        `
-      });
-
-      data = data.toString()
-      data = data.replace('^_^', content)
-      res.end(data)
+      let temHtml =  template.render(data.toString(), {
+        title:'Test',
+        files: files
+      })
+      res.end(temHtml)
     })
 
 
