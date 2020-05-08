@@ -9,18 +9,18 @@
         window.onload = function () {
             let arr = [1, 2, 4, 4, 3, 3, 1, 5, 2, 3, 4]; //[1, 3, 4]
             let str = 'casdfifdsaczsa'
-						let arr2 = [false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN]
-             console.log(duplicates_indexof(arr2));
+            let arr2 = [false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN]
+            console.log(duplicates_indexof(arr2));
             // console.log(duplicates2(arr));
             // console.log(duplicates3(arr));
             // console.log(duplicates4(arr));
             //console.log(searchChart(str));
-            
+
             //arr2.unique()
-						//console.log(arr2.unique())
+            //console.log(arr2.unique())
             let newArr = [...new Set(arr2)];
             console.log(newArr);
-            
+
         }
         //删除重复元素
         function duplicates(arr) {
@@ -36,10 +36,10 @@
             return res
         }
         //indexof删除重复元素
-        function duplicates_indexof(arr){
+        function duplicates_indexof(arr) {
             let newArr = [];
-            for(const val of arr){
-                if(newArr.indexOf(val) === -1){                    
+            for (const val of arr) {
+                if (newArr.indexOf(val) === -1) {
                     newArr.push(val)
                 }
             }
@@ -84,36 +84,36 @@
         //找出字符串中第一次出现的不重复字符？？？
         function searchChart(str) {
             for (let item of str) {
-                if (str.indexOf(item) === str.lastIndexOf(item)) {   
+                if (str.indexOf(item) === str.lastIndexOf(item)) {
                     return item
                 }
             }
             return false
         }
-				
-				
-				Array.prototype.unique = function(){
-					return [...new Set(this)];
-				}
-				
-				Array.prototype.uniq = function () {
-				    var newArr = [];
-				    var flag = true
-				    for(var i = 0; i < this.length; i++){
-				        if(newArr.indexOf(this[i]) == -1){
-				            if(this[i] != this[i]){  //去除NAN
-				                if(flag){
-				                    newArr.push(this[i]);
-				                    flag = false
-				                }
-				            }else{
-				                 newArr.push(this[i])
-				            }
-				           
-				        }
-				    }
-				    return newArr
-				}
+
+
+        Array.prototype.unique = function () {
+            return [...new Set(this)];
+        }
+
+        Array.prototype.uniq = function () {
+            var newArr = [];
+            var flag = true
+            for (var i = 0; i < this.length; i++) {
+                if (newArr.indexOf(this[i]) == -1) {
+                    if (this[i] != this[i]) {  //去除NAN
+                        if (flag) {
+                            newArr.push(this[i]);
+                            flag = false
+                        }
+                    } else {
+                        newArr.push(this[i])
+                    }
+
+                }
+            }
+            return newArr
+        }
     </script>
 </head>
 

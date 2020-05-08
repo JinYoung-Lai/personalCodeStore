@@ -19,6 +19,7 @@
         console.log(removeWithoutCopy(arr2,2));
         console.log(findAllOccurrences(tar,'a'))
     }
+    // 模拟indexOf
     function indexOf(arr, item){
         let index = -1
         for(let i=0; i<arr.length; i++){
@@ -29,6 +30,7 @@
         }
         return index;
     }
+    // 数组求和
     function  sum(arr) {
         let sum = 0;
         for(let i=0; i<arr.length; i++){
@@ -36,6 +38,8 @@
         }
         return sum
     }
+
+    // 去除指定项
     function removeWithoutCopy(arr, item) {
         for(let i=0; i<arr.length; i++){
             if(item == arr[i]){
@@ -46,7 +50,7 @@
         return arr
     }
 
-
+    // 找出指定项
     function findAllOccurrences(arr, target) {
         var temp = [];
         arr.forEach(function(val,index){
