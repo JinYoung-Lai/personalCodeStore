@@ -32,6 +32,7 @@
         }
       }
     }  
+
     // 浅拷贝第一种方法
     function simpleCopy(obj){
       let newObj = {};
@@ -46,8 +47,8 @@
     clonePerson.name = 'tom'
     clonePerson.food.fruit = 'banana'
     clonePerson.food.meat.red = 'pork';
-    console.log(clonePerson)
-    console.log(person) 
+    console.log('clonePerson', clonePerson)
+    console.log('person', person) 
     // 浅拷贝除了最外层没有改变person.name的属性，深层的把原来的对象属性一起改变了。
 
     // 浅拷贝第二种方法 assign
@@ -61,28 +62,35 @@
 
     /* -----深拷贝-----*/
     // 第一种方法
-    function deepClone(initalObj, finalObj){
-      let obj = initalObj || {};
-      for(let i in initalObj){
-        let prop = initalObj[i];
-        if(prop === obj){
-          continue;
-        }
-        if(typeof prop === 'object'){
-          obj[i] = (prop.constructor === Array) ? [] : {};
-          arguments.callee(prop, obj[i]);
-        }else{
-          obj[i] = prop;
+    function deepClone(obj){
+      let objClone = Array.isArray(obj)?[]:{}
+      if(obj && typeof obj === 'object'){
+        for(key in obj){
+          if(obj.hasOwnProperty(key)){
+            if(obj[key] && typeof obj[key] === 'object'){
+              objClone[key] = arguments.callee(obj[key])
+            }else{
+              objClone[key] = obj[key]
+             }
+          }
         }
       }
-      return obj;
+      console.log(objClone)
+      return objClone  
     }
 
     // 第二种方法
-    let createCloneObj = Object.create(oldObj)
+    let createCloneObj = Object.create(person)
 
     // 第三种方法
-    let jsonCloneObj = JSON.parse(JSON.stringify(oldObj))
+    // let jsonCloneObj = JSON.parse(JSON.stringify(person))
+
+    let jsonCloneObj = deepClone(person)
+    jsonCloneObj.name = 'young'
+    jsonCloneObj.food.fruit = 'pear'
+    jsonCloneObj.food.meat.red = 'fish';
+    console.log('jsonCloneObj', jsonCloneObj)
+    console.log('person', person) 
   }
 </script>
 </html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>金字塔</title>
+  <style>
+    ul {
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    .rowbox {
+
+      height: 30px;
+      width: 100%;
+    }
+
+    .row {
+      margin: 0 auto;
+      height: 30px;
+      display: flex;
+    }
+
+    .cell {
+      list-style: none;
+      flex: 1;
+      height: 28px;
+      width: 48px;
+      line-height: 30px;
+      text-align: center;
+      background: pink;
+      border: 1px solid red;
+    }
+
+    .triangle-up {
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 28px solid pink;
+    }
+
+    .triangle-left {
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-right: 50px solid pink;
+      border-bottom: 0px solid transparent;
+    }
+
+    .triangle-right {
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-left: 50px solid pink;
+      border-bottom: 0px solid transparent;
+    }
+  </style>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    pyramid(10)
+  }
+  function pyramid(n) {
+    if (n % 2 !== 0) {
+      n = n + 1;
+    }
+    for (let i = 2; i <= n; i += 2) {
+      console.log(i)
+      let body = document.getElementsByTagName('body')[0]
+      let oDiv = document.createElement('div')
+      oDiv.setAttribute('class', 'rowbox')
+      let oUl = document.createElement('ul')
+      oUl.setAttribute('class', 'row')
+      oDiv.appendChild(oUl)
+      body.appendChild(oDiv)
+      for (let j = 0; j <= i; j++) {
+        let oLi = document.createElement('li')
+        if (j === 0) {
+          oLi.setAttribute('class', 'triangle-left')
+        } else if (j === i) {
+          oLi.setAttribute('class', 'triangle-right')
+        }
+        else {
+          oLi.setAttribute('class', 'cell')
+        }
+        oUl.style.width = j * 50 + 'px'
+        oUl.appendChild(oLi)
+      }
+
+    }
+
+
+
+  }
+</script>
+
+</html>

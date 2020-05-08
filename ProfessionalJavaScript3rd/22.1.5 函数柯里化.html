@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>22.1.5 函数柯里化</title>
-	</head>
-	<body>
-	</body>
-	<script>
-		window.onload = function(){
-			function currying(fn, n){
-				return function(m){
-					return fn.call(this, m, n);
-				}
+
+<head>
+	<meta charset="utf-8">
+	<title>22.1.5 函数柯里化</title>
+</head>
+
+<body>
+</body>
+<script>
+	window.onload = function () {
+		function currying(fn, n) {
+			return function (m) {
+				return fn.call(this, m, n);
 			}
-			
-			function tailFactorial(n, total){
-				if(n === 1) return total;
-				return tailFactorial(n - 1, n * total);
-			}
-			
-			const factorial = currying(tailFactorial, 1);
-			
-			console.log(factorial(5)) 
 		}
-	</script>
+
+		function tailFactorial(n, total) {
+			if (n === 1) return total;
+			return tailFactorial(n - 1, n * total);
+		}
+
+		const factorial = currying(tailFactorial, 1);
+
+		console.log(factorial(5))
+
+		// 函数柯里化通用方式
+		function curry(fn) {
+			var args = Array.prototype.slice.call(arguments, 1);
+			return function () {
+				var innerArgs = Array.prototype.slice.call(arguments);
+				var finalArgs = args.concat(innerArgs);
+				return fn.apply(null, finalArgs);
+			};
+		}
+	}
+</script>
+
 </html>

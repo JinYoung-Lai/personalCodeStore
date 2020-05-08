@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <title>九九乘法表</title>
     <style>
-        .row{
+        .rowx {
             width: 100%;
             height: 30px;
         }
-        .cell{
+
+        .cell {
             list-style: none;
             float: left;
             height: 30px;
             width: 100px;
-            margin-right:10px ;
+            margin-right: 10px;
             line-height: 30px;
             text-align: center;
             background: chartreuse;
@@ -22,24 +23,29 @@
     </style>
     <script>
         window.onload = function () {
-            
-            Math99()
+            math9x9()
+            // Math99()
         }
-        function Math99() {
-            for(let i=1; i<10; i++ ){
-                let vUl = document.createElement('ul')
-                vUl.setAttribute('class','row')
-                document.getElementsByTagName('body')[0].appendChild(vUl);
-                for(let j=1; j<=i; j++){
-                    let vli = document.createElement('li');
-                    vli.setAttribute('class','cell')
-                    let text = document.createTextNode(j+'*'+i+'='+i*j);
-                    vli.appendChild(text);
-                    vUl.appendChild(vli)
+        function math9x9() { 
+            let body = document.getElementsByTagName('body')[0]
+            for(let i = 1; i < 10; i++){
+                let oUl = document.createElement('ul')
+                oUl.setAttribute('class', 'rowx')
+                for(let j = 1; j <= i; j++){
+                    let oLi = document.createElement('li')
+                    oLi.setAttribute('class', 'cell')
+                    let text = document.createTextNode(`${i} x ${j} = ${i*j}`)
+                    oLi.append(text)
+                    oUl.appendChild(oLi)
                 }
-            }
-            
+                body.appendChild(oUl)
+            }  
         }
+
+        
+
+
+
 
     </script>
 </head>

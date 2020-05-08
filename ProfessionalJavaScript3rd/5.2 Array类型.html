@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Array类型</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+
+    let arr = ['welcome', 'to', 'pcGroup']
+
+    // 5.2.1检测数组
+    console.log(Array.isArray(arr))
+    console.log(arr instanceof Array)
+
+    // 5.2.2 转换方法
+    console.log(arr.toString()) //'welcome,to,pcGroup'
+    console.log(arr.valueOf()) // ['welcome', 'to', 'pcGroup']
+    console.log(arr.join('.')) // 'welcome.to.pcGroup'
+
+    // 5.2.3栈方法 last in frist out
+    arr.push('hehe')
+    console.log(arr)
+    arr.pop()
+    console.log(arr)
+
+    // 5.2.4列队方法 last in last out
+    arr.push('hehe')
+    console.log(arr)
+    arr.shift()
+    console.log(arr)
+
+    // 5.2.5 重排序方法
+    let numArr = [1, 15, 23, 4, 21]
+    console.log(numArr.sort())
+  
+    Array.prototype.sortNum = function(){
+      function compare(val1, val2){
+        if(val1 < val2){
+          return -1
+        }else if(val1 > val2){
+          return 1
+        }else{
+          return 0
+        }
+      }
+      return this.sort(compare)
+    }
+    console.log(numArr.sortNum())
+
+    // 5.2.6操作方法
+    // 不会改变原数组 concat/slice
+    // 会改变原数组 splice
+    let arr2 = ['who', 'am', 'I'];
+    let arr3 = arr2.concat(['hehe'])
+    console.log(arr2)
+    console.log(arr3)
+
+    let arr4 = arr3.slice(0, 3) // 参数为起始位置
+    console.log(arr4)
+    
+    // 迭代方法 every/some/map/filter/forEach
+    // ervery 给数组的每一项运行给指定函数，有一个值为false，返回false
+    // some 给数组的每一项运行给指定函数，有一个值为true，返回true
+    // map 给数组的每一项运行给指定函数，返回运算后的数组
+    // filter 给数组的每一项运行给指定函数， 返回结果为true组成的数组
+    // forEach 给数组的每一项运行给指定函数，没有返回值
+
+    // 5.2.9归并方法reduce
+    // 四个参数 前一个值/当前值/项的索引/数组对象
+    let sum = numArr.reduce((pre, cur, index, arr) => {
+      return pre + cur
+    })
+    console.log(sum)
+
+
+  }
+
+
+</script>
+
+</html>

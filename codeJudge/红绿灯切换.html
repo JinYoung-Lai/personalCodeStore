@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    li {
+      list-style: none;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #bbb;
+      border-radius: 50%;
+      margin: 50px;
+    }
+
+    .gray {
+      background: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+<script>
+  window.onload = function () {
+   
+    console.log(oList)
+    star()
+  }
+  let oList = document.querySelectorAll('li');
+  function timeOut(ms) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(resolve, ms, 'done');
+      })
+    }
+    function star() {
+      timeOut(2000).then(() => {
+        oList[0].style.background = 'red'
+        oList[1].style.background = 'gray'
+        oList[2].style.background = 'gray'
+        return timeOut(2000)
+      }).then(() => {
+        oList[0].style.background = 'gray'
+        oList[1].style.background = 'yellow'
+        oList[2].style.background = 'gray'
+        return timeOut(4000)
+      }).then(() => {
+        oList[0].style.background = 'gray'
+        oList[1].style.background = 'gray'
+        oList[2].style.background = 'green'
+        star()
+      })
+    }
+      
+    
+</script>
+
+</html>

@@ -16,6 +16,7 @@
             border-bottom: 1px solid #999;
         }
         /* 使用定位 + 二维变换 transform: translate(-50%, -50%) */
+        /* 子节点 */
         .method1 {
             width: 50px;
             height: 50px;
@@ -25,7 +26,7 @@
             left: 50%;
             transform: translate(-50%, -50%)
         }
-
+         /* 子节点 */
         .method2 {
             position: absolute;
             top: 0;
@@ -38,7 +39,7 @@
 
             background: green;
         }
-
+         /* 父节点 */
         .method3 {
             display: flex;
             justify-content: center;
@@ -54,7 +55,7 @@
             height: 50px;
             background: blue;
         }
-
+        /* 父节点 */
         .method4 {
             display: table-cell;
             vertical-align: middle;
@@ -63,6 +64,7 @@
             height: 100px;
             border-bottom: 1px solid #999;
         }
+        /* 子节点 */
         .method5{
             position: absolute;
             top: 50%;
