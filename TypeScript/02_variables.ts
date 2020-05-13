@@ -46,3 +46,20 @@ let d = new D();
 let clone = { ...d };
 clone.p; // ok
 // clone.m(); // error!
+
+// 解构
+let input = [1, 2]
+let [first, second] = input
+console.log(first) // 1
+
+// 作用于函数参数
+function ff([first, second]:[number, number]){
+  console.log(first);
+  console.log(second)
+}
+ff([1,2]);
+
+type C = { a: string, b?: number }
+function fff( {a, b} : C) : void{
+  // ...
+}
