@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数列</title>
+</head>
+<body>
+  
+</body>
+<script>
+  window.onload = function(){
+    // 返回 1 - 1/3 + 1/5 - 1/7 + ... +1/n
+    sum(9)
+
+  }
+  function sum(n){
+    let res = 0
+    let b = -1
+    for(let i = 1; i <= n; i +=2){
+      // console.log(1/i)
+      b = -b
+      let x = b * (1/i);
+      console.log(x)
+      res += x;
+      
+    }
+    console.log(res)
+  } 
+</script>
+</html>
