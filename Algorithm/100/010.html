@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>棋盘</title>
+  <style>
+    .white{
+      background: #fff;
+    }
+    .black{
+      background: #000;
+    }
+    ul{
+      margin: 0;
+      padding: 0;
+      width: 400px;
+      display: flex;
+    }
+    li{
+      margin: 0;
+      width: 50px;
+      height: 50px;
+      list-style: none;
+    }
+    #chessboard{
+      width: 400px;
+      border: 1px solid #eee;
+    }
+    #chessboard2{
+      height: 400px;
+      width: 400px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .cell{
+      
+      width: 48px;
+      height: 48px;
+      border: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div id="chessboard"></div>
+  <h2>flex实现</h2>
+  <div id="chessboard2">
+  </div>
+  
+</body>
+<script>
+  window.onload = function(){
+    draw()
+    draw2()
+  }
+  function draw(){
+    for(let i = 0; i < 8; i++){
+      let oUl = document.createElement('ul')
+      for(let j = 0; j < 8; j++){
+        let oLi = document.createElement('li')
+        if((i+j)%2){
+          oLi.style.background = '#000'
+        }
+        oUl.appendChild(oLi)
+      }
+      document.getElementById('chessboard').appendChild(oUl)
+    }
+  }
+
+  function draw2(){
+    let c = true
+    for(let i = 0; i < 8; i++){
+      for(let j = 0; j < 8; j++){
+        let cell = document.createElement('div');
+        cell.setAttribute('class', 'cell')
+        if((i+j)%2){
+          cell.style.background = '#000'
+        }
+        document.getElementById('chessboard2').appendChild(cell)
+      }
+    }
+  }
+</script>
+</html>
