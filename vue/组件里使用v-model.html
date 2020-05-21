@@ -8,9 +8,9 @@
 </head>
 <body>
   <div id="app">
-    父组件：<div>{{name}}</div>
+    父组件：<div>{{beautiful}}</div>
     <div style="border:1px dashed blue;padding: 10px; margin-top: 10px;">
-      <my-a ref="component_A" :name="name" v-model="name"></my-a>
+      <my-a ref="component_A" :name="beautiful" v-model="beautiful"></my-a>
     </div>
   </div>
 
@@ -44,7 +44,7 @@
     el: '#app',
     data:{
       name:'父组件用户名',
-      beautiful:'',
+      beautiful:'父组件用户名',
       value:''
     },
     methods:{
