@@ -22,11 +22,42 @@
 		/* .input:hover{
 			border: 1px solid red;
 		} */
+		p{position: relative; line-height: 20px; max-height: 40px;overflow: hidden;}
+		p::after{content: "..."; position: absolute; bottom: 0; right: 0; padding-left: 40px;
+		background: -webkit-linear-gradient(left, transparent, #fff 55%);
+		background: -o-linear-gradient(right, transparent, #fff 55%);
+		background: -moz-linear-gradient(right, transparent, #fff 55%);
+		background: linear-gradient(to right, transparent, #fff 55%);
+		}
+		.row{
+			width: 100px;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+		}
+		.div1{
+			width: 100px;
+			line-height: 20px;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			text-overflow:ellipsis;
+			border: 1px solid pink;
+			
+		}
 	</style>
 </head>
 <body>
   <div class="odiv" id="oDiv">
 		输入：<input class="input">
+	</div>
+	<p class="row">
+		xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	</p>
+	<div class="div1">
+		XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	</div>
 </body>
 <script>
