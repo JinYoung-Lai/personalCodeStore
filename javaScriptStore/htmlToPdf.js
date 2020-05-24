@@ -1,5 +1,5 @@
 // 导出页面为PDF格式
-import html2Canvas from 'html2canvas'
+import html2Canvas from 'html2canvas' // 下载依赖安装
 import JsPDF from 'jspdf'
 export default {
   install(Vue, options) {
