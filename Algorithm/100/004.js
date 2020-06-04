@@ -22,7 +22,9 @@ function today(day){
     case '12': sum = 334; break; 
   }
   if((y%4 == 0 && y%100 != 0) || y%400 == 0){
-    return sum + d + 1;
+    if(M >= 3){
+      return sum + d + 1;
+    }
   }
   return sum + d
 

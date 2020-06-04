@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  window.onload = function(){
+    ee().then((res) => {
+      console.log(res)
+    })
+    xx()
+  }
+  function ee(){
+    return new Promise((resolve, reject) => {
+      resolve(1)
+      // setTimeout(() => {
+      //   resolve(1)
+      //   //console.log(1)
+      // }, 10000)
+    });  
+  }
+  function xx(){
+    let timeout = setTimeout(() => {
+      console.log(2)
+    },10000)
+    let promise = new Promise((res, rej) => {
+        let interval = setInterval(async () => {
+          try{
+            const resu = await ee()
+            console.log(resu)
+            res(resu)
+            clearInterval(interval)
+            clearTimeout(timeout)
+            // cancel()
+            // return ee.apply(this)
+            
+          }catch(e){
+            rej(e)
+          }
+        }, 1000)
+    })
+  }
+  function cancel() {
+    clearInterval(interval)
+    // args = null
+    interval = null
+    // firstCallTimestamp = null
+  }
+</script>
+</html>
