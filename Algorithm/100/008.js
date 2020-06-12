@@ -23,6 +23,7 @@ function gcd(m, n){
     n = t
   }
   let a = m*n
+  // 欧几里德算法
   let r = m%n
   while(r != 0){
     m = n

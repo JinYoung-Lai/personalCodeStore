@@ -39,7 +39,7 @@
         var b = new fun3();
         a.info.name = 'tom';
         b.info.name = 'jack';
-        console.log(a.info.name, b.info.name); 
+        console.log('3',a.info.name, b.info.name); 
         //jack jack 做错了
         //1.先查找构造函数实例里的属性或方法，如果有，就立即返回。
         //2.如果构造函数的实例没有，就去它的原型对象里找，如果有，就立即返回
@@ -55,7 +55,7 @@
         var b2 = new fun4();
         a2.info.name = 'jack';
         b2.info.name = 'tom';
-        console.log(a2.info.name, b2.info.name);//tom jack
+        console.log(a2.info.name, b2.info.name); // jack tom
 
         //第五题
         var fun5 = function () { }
@@ -67,7 +67,7 @@
         var b5 = new fun5();
         a5.name = 'jack';
         b5.name = 'tom';
-        console.log(a5.name, b5.name);//jack tom 
+        console.log(a5.name, b5.name); // jack tom 
 
         //第六题
         var fun6 = function () {
@@ -86,7 +86,7 @@
         var b6 = new fun6();
         a6.info.name = 'jack';
         b6.info.name = 'tom';
-        console.log(a6.info.name, b6.info.name);//jack tom
+        console.log(a6.info.name, b6.info.name);// jack tom
 
 
 

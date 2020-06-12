@@ -1,107 +1,118 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    
-    		<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>组件传值</title>
-		<script type="text/javascript" src="../lib/vue.js" ></script>
-	</head>
-	<style>
-		.exp1{border: 1px #006400 solid;}
-		.exp2{border: 3px red solid;}
-	</style>
-	<body>
-		<div id="app">
-			
-			<h1>父组件</h1>
-			<button v-on:set-name = "setAName">{{fatherName}}</button>
-			<my-exp1 name = "woshiname"></my-exp1>   <!--通过props属性父组件传值给子组件-->
-			<!-- <my-exp2></my-exp2> -->
-			
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>组件传值</title>
+	<script type="text/javascript" src="../lib/vue.js"></script>
+</head>
+<style>
+	.exp1 {
+		border: 1px #006400 solid;
+	}
+
+	.exp2 {
+		border: 3px red solid;
+	}
+</style>
+
+<body>
+	<div id="app">
+
+		<h1>父组件</h1>
+		<button v-on:set-name="setAName">{{fatherName}}</button>
+		<my-exp1 name="woshiname"></my-exp1>
+		<!--通过props属性父组件传值给子组件-->
+		<!-- <my-exp2></my-exp2> -->
+
+	</div>
+	<template id="example-1">
+		<div class="exp1">
+			<!--一定要有一个根节点-->
+			<h3>A组件：{{name}}</h3>
+			<input v-model="sonName" />
+			<button @click="sendTofather1">将数据发给父组件</button>
+			<button @click="sendToB">将数据发给B组件</button>
 		</div>
-		<template id="example-1">
-			<div class="exp1">  <!--一定要有一个根节点-->
-				<h3>A组件：{{name}}</h3>
-				<input v-model="sonName"/>
-				<button @click="sendTofather1">将数据发给父组件</button>
-				<button @click="sendToB">将数据发给B组件</button>
-			</div>
-		</template>
+	</template>
 
 
-		<template id="example-2">
-			<div class="exp2">  <!--一定要有一个根节点-->
-				<h2>B组件：A传过来的name：{{name}} B自己的age：{{age}}</h2>
-				<input v-model="age"/>
-				<button @click="sendTofather2">将数据发给父组件</button>
-				<button @click="sendToA">将数据发给A组件</button>
-				
-			</div>
-		</template>
-		
-	</body>
-	
-	<script>
-		window.onload =function(){
-			 var Event = new Vue();
-			var exp1 ={  //局部注册组件
-				name:'my-exp1',
-				props: ['name'],
-				data:function(){//组件里面data必须是个函数
-					return{
-						'sonName': '阿里巴巴'
-					}
+	<template id="example-2">
+		<div class="exp2">
+			<!--一定要有一个根节点-->
+			<h2>B组件：A传过来的name：{{name}} B自己的age：{{age}}</h2>
+			<input v-model="age" />
+			<button @click="sendTofather2">将数据发给父组件</button>
+			<button @click="sendToA">将数据发给A组件</button>
+
+		</div>
+	</template>
+
+</body>
+
+<script>
+	window.onload = function () {
+		var Event = new Vue();
+		var exp1 = { // 局部注册组件
+			name: 'my-exp1',
+			props: ['name'],
+			data: function () { // 组件里面data必须是个函数
+				return {
+					'sonName': '阿里巴巴'
+				}
+			},
+			methods: {
+				sendTofather1: function () {
+					console.log(this.sonName);
+					this.$emit('set-name', this.sonName);
 				},
-				methods:{
-					sendTofather1:function(){
-						console.log(this.sonName);
-						this.$emit('set-name',this.sonName); 
-					},
-					sendToB:function(){
-						
-					}
-				},
-				template:"#example-1"
-			};
-			// var exp2 ={
-			// 	name:'my-exp2',
-			// 	data:function(){//组件里面data必须是个函数
-			// 		return{
-			// 		}
-			// 	},
-			// 	methods:{
-			// 		sendTofather2:function(){
-			// 			this.$emit('set-name',this.name); 
-			// 		},
-			// 		sendToB:function(){
-						
-			// 		}
-			// 	},
-			// 	template:"#example-2"
-			// };
-			
-			var vm = new Vue({
-				el:"#app",
-				data:{
-					fatherName:'父组件用户名',
-					age:'',
-					sex:''
-				},
-				methods:{
-					setAName:function(e){//e为传递过来的参数
-						this.fatherName = e;
-						console.log(e);
-						alert('name ='+e);
-					}
-				},
-				components:{//局部注册组件
-					'my-exp1':exp1,
-					// 'my-exp2':exp2
-				},
-			});
-		
-		}
-		
-	</script>	
+				sendToB: function () {
+
+				}
+			},
+			template: "#example-1"
+		};
+		// var exp2 ={
+		// 	name:'my-exp2',
+		// 	data:function(){ // 组件里面data必须是个函数
+		// 		return{
+		// 		}
+		// 	},
+		// 	methods:{
+		// 		sendTofather2:function(){
+		// 			this.$emit('set-name',this.name); 
+		// 		},
+		// 		sendToB:function(){
+
+		// 		}
+		// 	},
+		// 	template:"#example-2"
+		// };
+
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				fatherName: '父组件用户名',
+				age: '',
+				sex: ''
+			},
+			methods: {
+				setAName: function (e) { //e为传递过来的参数
+					this.fatherName = e;
+					console.log(e);
+					alert('name =' + e);
+				}
+			},
+			components: { //局部注册组件
+				'my-exp1': exp1,
+				// 'my-exp2':exp2
+			},
+		});
+
+	}
+</script>
+
 </html>

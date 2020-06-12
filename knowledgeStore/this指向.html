@@ -12,18 +12,19 @@
 </body>
 <script>
   window.onload = function () {
-    org.getOrgName()(); //pcoline
-    let c = org.getOrgName()
-    c(); // pcoline
+    org.getOrgName()(); // windows
+    var c = org.getOrgName()
+    c(); // windows
 
-    let foo = obj.foo
-    foo() //pcoline
-    obj.foo()
+    var foo = obj.foo
+    foo() // windows
+    obj.foo() // King
+
+    // console.log(object.getNameFunc()());
   }
-  let name = "pcoline"
+  let name = "windows"
 
-
-  let org = {
+  var org = {
     name: "pcGroup",
     getOrgName: function () {
       return function () {
@@ -32,12 +33,22 @@
     }
   }
 
-  let obj = {
+  var obj = {
     name: 'King',
-    foo: function(){
+    foo: function () {
       console.log(this.name)
     }
   }
+
+  var wname = "Windows";
+  var object = {
+    wname: "Mac",
+    getNameFunc: function () {
+      return function () {
+        return this.wname;
+      };
+    }
+  };
 </script>
 
 </html>
