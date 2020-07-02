@@ -10,10 +10,18 @@
 </body>
 <script>
   window.onload = function(){
-    ee().then((res) => {
-      console.log(res)
-    })
-    xx()
+    // ee().then((res) => {
+    //   console.log(res)
+    // })
+    // xx()
+    tt()
+  }
+  function tt(){
+    let arr = ['xx', 'cc']
+    for(let i of arr){
+      i.age = 12
+      console.log(i)
+    }
   }
   function ee(){
     return new Promise((resolve, reject) => {
