@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo</title>
+</head>
+<style>
+  .phone {
+    position: relative;
+    width: 202px;
+    height: 402px;
+    border: 1px solid red;
+    overflow: hidden;
+  }
+
+  .box {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 200px;
+    height: 400px;
+    border: 1px solid green;
+
+  }
+
+  .drag {
+    margin: 10px auto;
+    height: 10px;
+    width: 30px;
+    background: hotpink;
+    border-radius: 5px;
+  }
+  .move{
+    animation:moveup 0.3s linear;
+  }
+  @keyframes moveup {
+    0% {
+      top: 200px;
+    }
+    100% {
+      top: 0px;
+    }
+  }
+
+  @keyframes movedown {
+    0% {
+      top: 0px;
+    }
+
+    100% {
+      top: 200px;
+    }
+  }
+
+  @-webkit-keyframes moveup {
+    0% {
+      top: 200px;
+    }
+
+    100% {
+      top: 0px;
+    }
+  }
+
+  @-webkit-keyframes movedown {
+    0% {
+      top: 0px;
+    }
+
+    100% {
+      top: 200px;
+    }
+  }
+</style>
+
+<body>
+  <div class="phone">
+    <div class="box">
+      <div class="drag">
+
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+
+  function startMove(element, target) {
+    var speed = 0;
+    if(element.offsetTop < iTarget)
+		{
+			iSpeed=10;
+		}
+		else
+		{
+			iSpeed=-10;
+		}
+
+    if(element.offsetTop == iTarget)
+		{
+			clearInterval(timer);
+		}else
+    {
+			oDiv.style.top = element.offsetTop+iSpeed+'px';
+		}
+  }
+
+  const El = document.querySelector('.drag');
+  const dragDom = document.querySelector('.box');
+  //El.style.cursor = 'move';       qu         
+  dragDom.style.cssText = ''
+
+  // 获取原有属性 ie dom元素.currentStyle 火狐谷歌 window.getComputedStyle(dom元素, null);
+  El.onmousedown = (e) => {
+    // 鼠标按下，计算当前元素距离可视区的距离
+    // const disX = e.clientX - El.offsetLeft;
+    const disY = e.clientY - El.offsetTop;
+
+    // const screenWidth = document.body.clientWidth; // body当前宽度
+    const screenHeight = document.documentElement.clientHeight; // 可见区域高度(应为body高度，可某些环境下无法获取) 
+    const minDragDomTop = dragDom.offsetTop;
+    const maxDragDomTop = screenHeight - dragDom.offsetTop;
+
+    const sty = (function () {
+      if (window.document.currentStyle) {
+        return (dom, attr) => dom.currentStyle[attr];
+      } else {
+        return (dom, attr) => getComputedStyle(dom, false)[attr];
+      }
+    })()
+    // 获取到的值带px 正则匹配替换
+    let styT = sty(dragDom, 'top');
+
+    // 注意在ie中 第一次获取到的值为组件自带50% 移动之后赋值为px
+    styT = +styT.replace(/\px/g, '');
+    
+    document.onmousemove = function (e) {
+      // 通过事件委托，计算移动的距离 
+  
+      let top = e.clientY - disY;
+
+      // 边界处理
+      if (-(top) > minDragDomTop) {
+        top = -(minDragDomTop);
+      } else if (top > maxDragDomTop) {
+        top = maxDragDomTop;
+      }
+
+      // 移动当前元素  
+      dragDom.style.cssText += `;top:${top + styT}px;`;
+
+    };
+
+    document.onmouseup = function (e) {
+      console.log(e.clientY)
+      if(e.clientY < 120){
+        dragDom.classList.add('move')
+        //dragDom.style.cssText += `;animation:moveup 0.3s linear;top:0; `;
+      }else if(e.clientY > 280) {
+        dragDom.style.cssText += `;animation:moveup 0.3s linear;top:0; `;
+      }
+      
+      document.onmousemove = null;
+      document.onmouseup = null;
+    };
+  }
+
+
+</script>
+
+</html>

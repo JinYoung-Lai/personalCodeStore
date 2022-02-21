@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .column_1,
+        .column_2 {
+          font-size: 2rem;
+            float: left;
+            width: 100px;
+            height: 300px;
+            background-color: green;
+        }
+        
+        .column_2 {
+            float: right;
+            font-size: 2em;
+        }
+        
+        .column_3 {
+            overflow: hidden;  /*创建bfc*/
+            height: 300px;
+            background-color: red;
+            font-size: 32px;
+        }
+        .contain{
+          font-size: 18px;
+        }
+  </style>
+</head>
+
+<body>
+  <div class="contain">
+    <div class="column_1">gggg</div>
+    <div class="column_2">ggggggg</div>
+    <div class="column_3">ggggggggg</div>
+  </div>
+</body>
+
+</html>
