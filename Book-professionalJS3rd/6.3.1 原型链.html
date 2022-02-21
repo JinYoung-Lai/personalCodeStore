@@ -17,12 +17,12 @@
       function SubType() { }
 
       // 继承SuperType
-      SubType.prototype = new SuperType();
+      SubType.prototype = new SuperType(); // 子类继承超类
 
-      let instance_1 = new SubType();
-      instance_1.colors.push('pink');
+      let instance_1 = new SubType(); //new一个子类
+      instance_1.colors.push('pink'); // 子类属性里面push
 
-      let instance_2 = new SubType();
+      let instance_2 = new SubType();  // new一个子类
       console.log('instance_2', instance_2.colors); // ["red", "blue", "green", "pink"]
       /* 包含引用类型值的原型属性会被所有实例共享；
         而这也正是为什么要在构造函数中，而不是在原型
